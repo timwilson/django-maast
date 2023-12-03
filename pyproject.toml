@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "django-maast"
+version = "0.1.0"
+description = "A Django front-end for the MAAST API."
+authors = ["Tim Wilson <tim@timwilson.info>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "5.0rc1"
+python-dotenv = "^1.0.0"
+httpx = "^0.25.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
