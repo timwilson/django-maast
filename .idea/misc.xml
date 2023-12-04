@@ -4,5 +4,5 @@
     <option name="pathToExecutable" value="/opt/homebrew/bin/black" />
     <option name="sdkName" value="Poetry (django-maast)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Poetry (django-maast)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.12.0 Docker Compose (web)" project-jdk-type="Python SDK" />
 </project>

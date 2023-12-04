@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <title>Organizations</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Abbreviation</th>
+                <th>Website</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for organization in organizations %}
+            <tr>
+                <td>{{ organization.name }}</td>
+                <td>{{ organization.abbreviation }}</td>
+                <td><a href="{{ organization.url }}">{{ organization.url }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

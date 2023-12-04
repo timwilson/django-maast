@@ -7,10 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-django = "5.0rc1"
-python-dotenv = "^1.0.0"
+django = "^5.0"
 httpx = "^0.25.2"
-
+python-decouple = "^3.8"
+django-tailwind = {extras = ["reload"], version = "^3.6.0"}
 
 [build-system]
 requires = ["poetry-core"]
