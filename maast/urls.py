@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import home_page_view, organizations_view
+from maast.views.organizations import home_page_view, organizations_view
 
 urlpatterns = [
     path("", home_page_view, name="home"),
