@@ -11,6 +11,8 @@ django = "^5.0"
 httpx = "^0.25.2"
 python-decouple = "^3.8"
 django-tailwind = {extras = ["reload"], version = "^3.6.0"}
+pydantic = "^2.5.2"
+fontawesomefree = "^6"
 
 [build-system]
 requires = ["poetry-core"]
