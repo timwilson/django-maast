@@ -1,14 +1,27 @@
+{% load static tailwind_tags %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_preload_css %}
+    {% tailwind_css %}
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    {% block head %}
+    {% endblock head %}
     <title>{% block title %}Bookstore{% endblock title %}</title>
 </head>
 <body>
-    <div class="container">
+{% include "_header.html" %}
+    <div class="container mx-auto sm:px-6 lg:px-8">
         {% block content %}
         {% endblock content %}
     </div>
+{% include "_footer.html" %}
+{% block extra_js %}
+{% endblock extra_js %}
 </body>
 </html>
