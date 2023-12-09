@@ -162,7 +162,7 @@ class Record(BaseModel):
     equipment_class: EquipmentClass
     gender: Gender
 
-    def custom_representation(self):
+    def template_representation(self):
         return {
             "age_division": self.age_division.name,
             "gender": self.gender.name,
