@@ -1,0 +1,74 @@
+{% extends "_base.html" %}
+{% block head %}
+<link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/fh-3.4.0/r-2.5.0/rg-1.4.1/datatables.min.css"
+      rel="stylesheet">
+<script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/fh-3.4.0/r-2.5.0/rg-1.4.1/datatables.min.js"></script>
+{% endblock head %}
+{% block title %}{{ event_name }}{% endblock title %}
+{% block content %}
+    <div class="mt-8 flow-root">
+        <div class="inline-block min-w-full align-middle">
+            <h1 class="my-4 text-2xl">{{ event_name }}</h1>
+            <table id="scoreTable" class="display compact responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="text-lg">Name</th>
+                        <th class="text-lg">Round</th>
+                        <th class="text-lg">Division</th>
+                        <th class="text-lg">Score</th>
+                        <th class="text-lg">Date</th>
+                        <th class="text-lg">Slug</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function () {
+        const data = {{ scores | safe }};
+        $('#scoreTable').DataTable({
+            data: data,
+            columns: [
+                {title: "Person", data: "person"},
+                {title: "Round", data: "round"},
+                {title: "Division", data: "division"},
+                {title: "Score", data: "pretty_score"},
+                {title: "Date", data: "event_date"},
+                {title: "Slug", data: "person_slug"},
+            ],
+            columnDefs: [
+                {targets: [2, 5], visible: false},
+                {target: 0, // Person
+                    className: "text-sm",
+                    render: function ( data, type, row ) {
+                        return '<a href="/profile/' + row.person_slug + '">' + data + '</a>';
+                    },
+                },
+                {
+                    target: 1, // Round
+                    className: "text-sm",
+                },
+                {target: 3, // Score
+                    className: "text-sm",
+                },
+                {target: 4, // Date
+                    className: "text-sm",
+                },
+            ],
+            rowGroup: {
+                dataSrc: "division"
+            },
+            responsive: true,
+            fixedHeader: true,
+            paging: true,
+            pageLength: 50,
+            ordering: false,
+            info: false,
+            searching: true,
+        });
+    });
+</script>
+{% endblock extra_js %}

@@ -1,4 +1,6 @@
 from datetime import date
+from typing import Dict, Any
+
 from pydantic import BaseModel, HttpUrl
 
 
@@ -117,6 +119,17 @@ class Finish(BaseModel):
     equipment_class: EquipmentClass
     gender: Gender
 
+    def template_representation(self) -> Dict[str, Any]:
+        return {
+            "age_division": self.age_division.name,
+            "gender": self.gender.name,
+            "equipment_class": self.equipment_class.name,
+            "place": self.place,
+            "event_date": self.event.event_date,
+            "event_name": self.event.name,
+            "event_location": self.event.location.name_and_location,
+        }
+
 
 class Score(BaseModel):
     id: int
@@ -138,7 +151,26 @@ class Score(BaseModel):
     age_division: AgeDivision
     equipment_class: EquipmentClass
     gender: Gender
-    rank: int
+    rank: int | None
+
+    def template_representation(self) -> Dict[str, Any]:
+        return {
+            "rank": self.rank,
+            "person": self.person.full_name,
+            "person_slug": self.person.slug,
+            "round": self.round.name,
+            "division": f"{self.age_division.name} {self.gender.name} {self.equipment_class.name}",
+            "age_division": self.age_division.name,
+            "gender": self.gender.name,
+            "equipment_class": self.equipment_class.name,
+            "score": self.score,
+            "x_count": self.x_count,
+            "pretty_score": self.pretty_score,
+            "event_id": self.event.id,
+            "event_date": self.event.event_date,
+            "event_name": self.event.name,
+            "event_location": self.event.location.name_and_location,
+        }
 
 
 class Record(BaseModel):
@@ -162,8 +194,10 @@ class Record(BaseModel):
     equipment_class: EquipmentClass
     gender: Gender
 
-    def template_representation(self):
+    def template_representation(self) -> Dict[str, Any]:
         return {
+            "round": self.round.name,
+            "round_id": self.round.id,
             "age_division": self.age_division.name,
             "gender": self.gender.name,
             "equipment_class": self.equipment_class.name,

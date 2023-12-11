@@ -14,9 +14,22 @@ def validate_and_sort_records(
     - list(Dict[str, Any]): The processed sorted records.
     """
     # Validate and Process records using Pydantic
+    # processed_records = [
+    #     Model(**raw_record).template_representation() for raw_record in raw_records
+    # ]
+
     processed_records = [
-        Model(**raw_record).template_representation() for raw_record in raw_records
+        {
+            k: (v if v is not None else "")
+            for k, v in Model(**raw_record).template_representation().items()
+        }
+        for raw_record in raw_records
     ]
+
     # Sort the records
-    processed_records.sort(key=lambda x: tuple(x[key] for key in sort_keys))
+    for key in reversed(sort_keys):
+        reverse = key.startswith("-")
+        key = key[1:] if reverse else key
+        processed_records.sort(key=lambda x: x[key], reverse=reverse)
+
     return processed_records

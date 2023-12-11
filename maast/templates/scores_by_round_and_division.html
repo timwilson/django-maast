@@ -4,25 +4,26 @@
       rel="stylesheet">
 <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/fh-3.4.0/r-2.5.0/rg-1.4.1/datatables.min.js"></script>
 {% endblock head %}
-{% block title %}State records{% endblock title %}
+{% block title %}Rankings for {{ division }} / {{ round_name }}{% endblock title %}
 {% block content %}
     <div class="mt-8 flow-root">
         <div class="inline-block min-w-full align-middle">
-            <h1 class="my-4 text-2xl">{{ round_name }} State Records</h1>
-            <table id="recordTable" class="display compact responsive nowrap" style="width:100%">
+            <h1 class="my-4 text-2xl">Rankings for {{ division }} / {{ round_name }}</h1>
+            <table id="scoreTable" class="display compact responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
+                        <th class="text-lg">Rank</th>
+                        <th class="text-lg">Name</th>
+                        <th class="text-lg">Round</th>
                         <th class="text-lg">Age Division</th>
                         <th class="text-lg">Gender</th>
-                        <th class="text-lg">Division</th>
-                        <th class="text-lg">Name</th>
-                        <th class="text-lg">Slug</th>
+                        <th class="text-lg">Equipment Class</th>
                         <th class="text-lg">Score</th>
-                        <th class="text-lg">Event ID</th>
-                        <th class="text-lg">Date</th>
-                        <th class="text-lg">Event</th>
+                        <th class="text-lg">Event Date</th>
+                        <th class="text-lg">Event Name</th>
                         <th class="text-lg">Location</th>
-                        <th class="text-lg">Round ID</th>
+                        <th class="text-lg">Event ID</th>
+                        <th class="text-lg">Slug</th>
                     </tr>
                 </thead>
             </table>
@@ -33,40 +34,35 @@
 {% block extra_js %}
 <script>
     $(document).ready(function () {
-        const data = {{ state_records | safe }};
-        $('#recordTable').DataTable({
+        const data = {{ scores | safe }};
+        $('#scoreTable').DataTable({
             data: data,
             columns: [
-                {title: "Age Division", data: "age_division"},
+                {title: "Rank", data: "rank"},
+                {title: "Person", data: "person"},
+                {title: "Round", data: "round"},
+                {title: "Division", data: "age_division"},
                 {title: "Gender", data: "gender"},
-                {title: "Division", data: "equipment_class"},
-                {title: "Name", data: "full_name"},
-                {title: "Slug", data: "person_slug"},
-                {title: "Score", data: "score"},
-                {title: "Event ID", data: "event_id"},
+                {title: "Equipment Class", data: "equipment_class"},
+                {title: "Score", data: "pretty_score"},
                 {title: "Date", data: "event_date"},
                 {title: "Event", data: "event_name"},
                 {title: "Location", data: "event_location"},
-                {title: "Round ID", data: "round_id"},
+                {title: "Event ID", data: "event_id"},
+                {title: "Slug", data: "person_slug"},
             ],
             columnDefs: [
-                {targets: [0, 1, 4, 6, 10], visible: false},
-                {target: 2, // Division
+                {targets: [2, 3, 4, 5, 10, 11], visible: false},
+                {target: 0, // Rank
                     className: "text-sm",
-                    render: function ( data, type, row ) {
-                    let division = '?age_division='+encodeURIComponent(row.age_division)+
-                        '&gender='+encodeURIComponent(row.gender)+
-                        '&equipment_class='+encodeURIComponent(row.equipment_class)
-                    return '<a href="/scores/'+row.round_id+division+'">'+row.gender+' '+row.equipment_class+'</a>';
-                    }
                 },
-                {target: 3, // Name
+                {target: 1, // Person
                     className: "text-sm",
                     render: function ( data, type, row ) {
                         return '<a href="/profile/' + row.person_slug + '">' + data + '</a>';
-                    }
+                    },
                 },
-                {target: 5, // Score
+                {target: 6, // Score
                     className: "text-sm",
                 },
                 {target: 7, // Date
@@ -81,12 +77,10 @@
                 {target: 9, // Location
                     className: "text-sm"},
             ],
-            rowGroup: {
-                dataSrc: "age_division"
-            },
             responsive: true,
             fixedHeader: true,
-            paging: false,
+            paging: true,
+            pageLength: 25,
             ordering: false,
             info: false,
             searching: false,

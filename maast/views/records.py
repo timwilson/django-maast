@@ -1,4 +1,6 @@
 from typing import List, Dict, Any
+
+from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
@@ -23,7 +25,7 @@ def fetch_records_by_round(round_id: int) -> List[Dict[str, Any]]:
     >>> fetch_records_by_round(123)
     [{'id': 1, 'name': 'John Doe'}, {'id': 2, 'name': 'Jane Smith'}]
     """
-    url = f"http://maast-api:8000/v1/rounds/{round_id}/records"
+    url = f"{settings.API_HOST}/v1/rounds/{round_id}/records"
     with MaastHTTPClient() as client:
         response = client.get(url)
     return response.json()

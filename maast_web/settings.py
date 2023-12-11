@@ -25,6 +25,11 @@ SECRET_KEY = config("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
 
+if DEBUG:
+    API_HOST = config("DEVELOPMENT_API_HOST")
+else:
+    API_HOST = config("PRODUCTION_API_HOST")
+
 ALLOWED_HOSTS = []
 
 INTERNAL_IPS = ["127.0.0.1"]
