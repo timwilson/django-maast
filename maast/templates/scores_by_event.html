@@ -36,11 +36,13 @@
                 {title: "Round", data: "round"},
                 {title: "Division", data: "division"},
                 {title: "Score", data: "pretty_score"},
-                {title: "Date", data: "event_date"},
+                {title: "Score Date", data: "score_date"},
+                {title: "Event Date", data: "event_date"},
                 {title: "Slug", data: "person_slug"},
+                {title: "Multiday", data: "is_multiday_score"},
             ],
             columnDefs: [
-                {targets: [2, 5], visible: false},
+                {targets: [2, 5, 6, 7], visible: false},
                 {target: 0, // Person
                     className: "text-sm",
                     render: function ( data, type, row ) {
@@ -56,6 +58,13 @@
                 },
                 {target: 4, // Date
                     className: "text-sm",
+                    render: function ( data, type, row ) {
+                        if (row.is_multiday_score == false) {
+                            return row.score_date;
+                        } else {
+                            return row.event_date;
+                        }
+                    },
                 },
             ],
             rowGroup: {

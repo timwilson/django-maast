@@ -90,6 +90,7 @@ class EventRound(BaseModel):
     event_date: date | None
     event_id: int
     round_id: int
+    score_date: str
 
 
 class Event(BaseModel):
@@ -164,6 +165,10 @@ class Score(BaseModel):
             "gender": self.gender.name,
             "equipment_class": self.equipment_class.name,
             "score": self.score,
+            "score_date": self.event_round.score_date,
+            "is_multiday_score": 1
+            if self.possible_multiday_score
+            else 0,  # DataTables javascript doesn't like capitalized True or False.
             "x_count": self.x_count,
             "pretty_score": self.pretty_score,
             "event_id": self.event.id,
@@ -204,6 +209,10 @@ class Record(BaseModel):
             "full_name": self.person.full_name,
             "person_slug": self.person.slug,
             "score": self.pretty_score,
+            "score_date": self.event_round.score_date,
+            "is_multiday_score": 1
+            if self.possible_multiday_score
+            else 0,  # DataTables javascript doesn't like capitalized True or False.
             "event_id": self.event.id,
             "event_date": self.event.event_date,
             "event_name": self.event.name,

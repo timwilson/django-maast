@@ -45,14 +45,16 @@
                 {title: "Gender", data: "gender"},
                 {title: "Equipment Class", data: "equipment_class"},
                 {title: "Score", data: "pretty_score"},
-                {title: "Date", data: "event_date"},
+                {title: "Date", data: "score_date"},
                 {title: "Event", data: "event_name"},
                 {title: "Location", data: "event_location"},
                 {title: "Event ID", data: "event_id"},
                 {title: "Slug", data: "person_slug"},
+                {title: "Event Date", data: "event_date"},
+                {title: "Multiday", data: "is_multiday_score"},
             ],
             columnDefs: [
-                {targets: [2, 3, 4, 5, 10, 11], visible: false},
+                {targets: [2, 3, 4, 5, 10, 11, 12, 13], visible: false},
                 {target: 0, // Rank
                     className: "text-sm",
                 },
@@ -67,6 +69,13 @@
                 },
                 {target: 7, // Date
                     className: "text-sm",
+                    render: function ( data, type, row ) {
+                        if (row.is_multiday_score == false) {
+                            return row.score_date;
+                        } else {
+                            return row.event_date;
+                        }
+                    },
                 },
                 {target: 8, // Event
                     className: "text-sm",

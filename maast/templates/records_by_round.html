@@ -44,13 +44,15 @@
                 {title: "Slug", data: "person_slug"},
                 {title: "Score", data: "score"},
                 {title: "Event ID", data: "event_id"},
-                {title: "Date", data: "event_date"},
+                {title: "Date", data: "score_date"},
                 {title: "Event", data: "event_name"},
                 {title: "Location", data: "event_location"},
                 {title: "Round ID", data: "round_id"},
+                {title: "Event Date", data: "event_date"},
+                {title: "Multiday", data: "is_multiday_score"},
             ],
             columnDefs: [
-                {targets: [0, 1, 4, 6, 10], visible: false},
+                {targets: [0, 1, 4, 6, 10, 11, 12], visible: false},
                 {target: 2, // Division
                     className: "text-sm",
                     render: function ( data, type, row ) {
@@ -71,6 +73,13 @@
                 },
                 {target: 7, // Date
                     className: "text-sm",
+                    render: function ( data, type, row ) {
+                        if (row.is_multiday_score == false) {
+                            return row.score_date;
+                        } else {
+                            return row.event_date;
+                        }
+                    },
                 },
                 {target: 8, // Event
                     className: "text-sm",
