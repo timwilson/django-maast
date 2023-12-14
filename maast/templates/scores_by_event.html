@@ -9,18 +9,8 @@
     <div class="mt-8 flow-root">
         <div class="inline-block min-w-full align-middle">
             <h1 class="my-4 text-2xl">{{ event_name }}</h1>
-            <table id="scoreTable" class="display compact responsive nowrap" style="width:100%">
-                <thead>
-                    <tr>
-                        <th class="text-lg">Name</th>
-                        <th class="text-lg">Round</th>
-                        <th class="text-lg">Division</th>
-                        <th class="text-lg">Score</th>
-                        <th class="text-lg">Date</th>
-                        <th class="text-lg">Slug</th>
-                    </tr>
-                </thead>
-            </table>
+            <p>{{ event_location }}</p>
+            <table id="scoreTable" class="display compact responsive nowrap" style="width:100%"></table>
         </div>
     </div>
 {% endblock content %}
@@ -32,34 +22,26 @@
         $('#scoreTable').DataTable({
             data: data,
             columns: [
-                {title: "Person", data: "person"},
+                {title: "Name", data: "person"},
                 {title: "Round", data: "round"},
-                {title: "Division", data: "division"},
                 {title: "Score", data: "pretty_score"},
-                {title: "Score Date", data: "score_date"},
-                {title: "Event Date", data: "event_date"},
-                {title: "Slug", data: "person_slug"},
-                {title: "Multiday", data: "is_multiday_score"},
+                {title: "Date", data: "score_date"},
             ],
             columnDefs: [
-                {targets: [2, 5, 6, 7], visible: false},
+                {targets: [0, 1, 2, 3], className: "text-sm"},
                 {target: 0, // Person
-                    className: "text-sm",
                     render: function ( data, type, row ) {
                         return '<a href="/profile/' + row.person_slug + '">' + data + '</a>';
                     },
                 },
-                {
-                    target: 1, // Round
-                    className: "text-sm",
-                },
-                {target: 3, // Score
-                    className: "text-sm",
-                },
-                {target: 4, // Date
-                    className: "text-sm",
+                {target: 1, // Round
                     render: function ( data, type, row ) {
-                        if (row.is_multiday_score == false) {
+                        return '<a href="/records/' + row.round_id + '">' + data + '</a>';
+                    }
+                },
+                {target: 3, // Date
+                    render: function ( data, type, row ) {
+                        if (row.is_multiday_score === 0) {
                             return row.score_date;
                         } else {
                             return row.event_date;
@@ -74,9 +56,15 @@
             fixedHeader: true,
             paging: true,
             pageLength: 50,
+            lengthChange: false,
             ordering: false,
-            info: false,
+            info: true,
             searching: true,
+            preDrawCallback: function (settings) {
+                const api = new $.fn.dataTable.Api(settings);
+                const pagination = $(api.table().container()).find('.dataTables_paginate');
+                pagination.toggle(api.page.info().pages > 1);
+            },
         });
     });
 </script>

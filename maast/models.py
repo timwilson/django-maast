@@ -1,3 +1,8 @@
+"""
+These Pydantic models mirror and database models in the MAAST API
+application at https://github.com/timwilson/maast-api
+"""
+
 from datetime import date
 from typing import Dict, Any
 
@@ -122,11 +127,11 @@ class Finish(BaseModel):
 
     def template_representation(self) -> Dict[str, Any]:
         return {
-            "age_division": self.age_division.name,
-            "gender": self.gender.name,
-            "equipment_class": self.equipment_class.name,
+            "division": f"{self.age_division.name} {self.gender.name} {self.equipment_class.name}",
             "place": self.place,
+            "start_date": self.event.start_date,
             "event_date": self.event.event_date,
+            "event_id": self.event.id,
             "event_name": self.event.name,
             "event_location": self.event.location.name_and_location,
         }
@@ -156,21 +161,22 @@ class Score(BaseModel):
 
     def template_representation(self) -> Dict[str, Any]:
         return {
-            "rank": self.rank,
+            "rank": self.rank if self.rank is not None else "",
             "person": self.person.full_name,
             "person_slug": self.person.slug,
+            "round_id": self.round.id,
             "round": self.round.name,
             "division": f"{self.age_division.name} {self.gender.name} {self.equipment_class.name}",
             "age_division": self.age_division.name,
             "gender": self.gender.name,
             "equipment_class": self.equipment_class.name,
-            "score": self.score,
             "score_date": self.event_round.score_date,
             "is_multiday_score": 1
             if self.possible_multiday_score
             else 0,  # DataTables javascript doesn't like capitalized True or False.
-            "x_count": self.x_count,
             "pretty_score": self.pretty_score,
+            "score": self.score,
+            "x_count": self.x_count if self.x_count is not None else 0,
             "event_id": self.event.id,
             "event_date": self.event.event_date,
             "event_name": self.event.name,
@@ -206,6 +212,7 @@ class Record(BaseModel):
             "age_division": self.age_division.name,
             "gender": self.gender.name,
             "equipment_class": self.equipment_class.name,
+            "division": f"{self.age_division.name} {self.gender.name} {self.equipment_class.name}",
             "full_name": self.person.full_name,
             "person_slug": self.person.slug,
             "score": self.pretty_score,

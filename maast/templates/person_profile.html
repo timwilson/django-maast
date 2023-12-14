@@ -1,16 +1,33 @@
 {% extends "_base.html" %}
+{% load static %}
 {% block head %}
-<link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/fh-3.4.0/r-2.5.0/rg-1.4.1/datatables.min.css"
-      rel="stylesheet">
-<script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/fh-3.4.0/r-2.5.0/rg-1.4.1/datatables.min.js"></script>
-{% endblock head %}
-{% block title %}{{ person_name }} Profile{% endblock title %}
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/fh-3.4.0/r-2.5.0/rg-1.4.1/datatables.min.css"
+          rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/fh-3.4.0/r-2.5.0/rg-1.4.1/datatables.min.js"></script>{% endblock head %}
+{% block title %}{{ person.full_name }} Profile{% endblock title %}
 {% block content %}
-<h1>{{ person_name }}</h1>
+    <h1>{{ person.full_name }}</h1>
+    <div class="button-group">
+        <button id="btnScores">Scores</button>
+        <button id="btnStateRecords">State Records</button>
+        <button id="btnPodiums">Podiums</button>
+    </div>
+    <div class="mt-8 flow-root">
+        <div class="inline-block min-w-full align-middle">
+            <div id="scoresTableContainer">
+                <table id="scoresTable" class="display compact responsive nowrap" style="width:100%"></table>
+            </div>
+            <div id="stateRecordsTableContainer">
+                <table id="stateRecordsTable" class="display compact responsive nowrap" style="width:100%"></table>
+            </div>
+            <div id="podiumsTableContainer">
+                <table id="podiumsTable" class="display compact responsive nowrap" style="width:100%"></table>
+            </div>
+        </div>
+    </div>
+    <div data-person-id="{{ person.id }}" style="display:none"></div>
 {% endblock content %}
 
 {% block extra_js %}
-<script>
-
-</script>
+    <script src="{% static 'js/profilePage.js' %}"></script>
 {% endblock extra_js %}

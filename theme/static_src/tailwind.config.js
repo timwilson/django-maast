@@ -44,6 +44,9 @@ module.exports = {
     theme: {
         extend: {},
     },
+    safelist: [
+        'text-center', 'text-lg',
+    ],
     plugins: [
         /**
          * '@tailwindcss/forms' is the forms plugin that provides a minimal styling
