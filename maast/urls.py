@@ -11,6 +11,7 @@ from maast.views.persons import (
 )
 from maast.views.records import get_valid_records_by_round
 from maast.views.scores import get_valid_scores_by_round_and_division
+from maast.views.static_pages import faq_view, privacy_policy_view, terms_of_use_view
 
 urlpatterns = [
     path("", home_page_view, name="home"),
@@ -30,4 +31,8 @@ urlpatterns = [
     ),
     path("api/podiums/<int:person_id>", get_valid_person_podiums, name="api_podiums"),
     path("api/search", search_persons_by_name, name="api_person_search"),
+    # Add URLs for the few static pages on the site
+    path("faq", faq_view, name="faq"),
+    path("privacy", privacy_policy_view, name="privacy_policy"),
+    path("terms-of-use", terms_of_use_view, name="terms_of_use"),
 ]

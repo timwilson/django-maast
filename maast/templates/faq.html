@@ -1,0 +1,90 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block head %}
+    <!-- Add any specific head content here -->
+{% endblock head %}
+
+{% block title %}FAQs{% endblock title %}
+
+{% block content %}
+    <div class="mx-auto max-w-7xl px-6 py-10 sm:pt-32 lg:px-8 lg:py-20">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+            <div class="lg:col-span-5">
+                <h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">Frequently asked questions</h2>
+                <p class="mt-4 text-base leading-7 text-gray-600">Can’t find the answer you’re looking for?
+                    <a href="mailto:president@themnaa.org" class="font-semibold text-indigo-600 hover:text-indigo-500">
+                        Reach out</a> and we’ll help.</p>
+            </div>
+            <div class="mt-10 lg:col-span-7 lg:mt-0">
+                <dl class="space-y-10">
+                    <div>
+                        <dt class="text-base font-semibold leading-7 text-gray-900">How did you guys build this?</dt>
+                        <dd class="mt-2 mb-5 text-base leading-7 text-gray-600">
+                            The database that powers this site contains every score ever shot by an MAA member at an
+                            MAA-hosted event since 2003. Besides calculating state records, this has the advantage
+                            of letting site visitors see a more complete history of MAA scores and events.
+                        </dd>
+
+                        <dt class="text-base font-semibold leading-7 text-gray-900">What kind of information can I find
+                            here?
+                        </dt>
+                        <dd class="mt-2 mb-5 text-base leading-7 text-gray-600">
+                            Besides state records for all current and retired rounds shot in the MAA’s history,
+                            visitors will find a ranked list of scores short for every round and division.
+                            There is also a score listing for every MAA event as well as a profile for each
+                            person in the score database which includes their scores and any state records they own.
+                        </dd>
+
+                        <dt class="text-base font-semibold leading-7 text-gray-900">Who is eligible to set a start
+                            record?
+                        </dt>
+                        <dd class="mt-2 mb-5 text-base leading-7 text-gray-600">
+                            In order to be eligible to set a state record, an archer must be a member of the MAA.
+                            All NFAA members who select Minnesota as their home state and all Minnesota residents
+                            who are members of USA Archery or S3DA are members of the MAA.
+                        </dd>
+
+                        <dt class="text-base font-semibold leading-7 text-gray-900">At which events can state
+                            records be set?
+                        </dt>
+                        <dd class="mt-2 mb-5 text-base leading-7 text-gray-600">
+                            Archers can set state records at any MAA-sponsored event or any USA Archery, NFAA,
+                            or S3DA event that takes place in Minnesota.
+                        </dd>
+
+                        <dt class="text-base font-semibold leading-7 text-gray-900">What should I do if I find
+                            a mistake?
+                        </dt>
+                        <dd class="mt-2 mb-5 text-base leading-7 text-gray-600">
+                            If you find a mistake or think that there’s a score missing from the database,
+                            send us an email. We’ll reach out and work with you to get things fixed up.
+                        </dd>
+
+                        <dt class="text-base font-semibold leading-7 text-gray-900">What about guest scores at
+                            tournaments?
+                        </dt>
+                        <dd class="mt-2 mb-5 text-base leading-7 text-gray-600">
+                            We only record scores for MAA members on this site since only members can qualify
+                            for state records. Full tournament results including scores from our guests are
+                            available on the MAA website or at one of the national organizations’ sites.
+                        </dd>
+
+                        <dt class="text-base font-semibold leading-7 text-gray-900">Where can I find state records
+                            for the Minnesota State Archery Association (MSAA)?
+                        </dt>
+                        <dd class="mt-2 mb-5 text-base leading-7 text-gray-600">
+                            The MSAA is a separate, independent archery organization in Minnesota. You will find
+                            their start records on their website at <a href="https://mnarchery.org/">mnarchery.org</a>
+                        </dd>
+                    </div>
+
+                </dl>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block extra_js %}
+{% endblock extra_js %}
