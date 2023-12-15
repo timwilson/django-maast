@@ -20,7 +20,33 @@
         {% block content %}
         {% endblock content %}
     </div>
+{% include "modal.html" %}
 {% include "_footer.html" %}
+<script>
+    // JavaScript for the modal functionality
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const modal = document.getElementById('modal');
+        const viewRecordsLink = document.getElementById('viewRecordsLink');
+        const closeModal = document.getElementById('closeModal');
+
+        if (viewRecordsLink) {
+            viewRecordsLink.onclick = function (e) {
+                e.preventDefault(); // Prevent default link behavior
+                modal.classList.remove('hidden');
+            };
+        }
+
+        closeModal.onclick = function () {
+            modal.classList.add('hidden');
+        }
+
+        window.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                modal.classList.add('hidden');
+            }
+        });
+    });
+</script>
 {% block extra_js %}
 {% endblock extra_js %}
 </body>
