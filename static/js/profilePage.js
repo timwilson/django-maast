@@ -2,18 +2,64 @@ document.addEventListener('DOMContentLoaded', function () {
     const personId = document.querySelector('[data-person-id]').dataset.personId;
     loadScoresTable(personId);  // Load the scores by default
 
-    document.getElementById('btnScores').addEventListener('click', function () {
+    document.getElementById('btnScores').addEventListener('click', function (event) {
+        event.preventDefault();
+        setActiveTab(this);
         toggleTables('scores');
         loadScoresTable(personId);
     });
-    document.getElementById('btnStateRecords').addEventListener('click', function () {
+
+    document.getElementById('btnStateRecords').addEventListener('click', function (event) {
+        event.preventDefault();
+        setActiveTab(this);
         toggleTables('stateRecords');
         loadStateRecordsTable(personId);
     });
-    document.getElementById('btnPodiums').addEventListener('click', function () {
+
+    document.getElementById('btnPodiums').addEventListener('click', function (event) {
+        event.preventDefault();
+        setActiveTab(this);
         toggleTables('podiums');
         loadPodiumsTable(personId);
     });
+
+    function setActiveTab(activeTabElement) {
+        // Define the classes for active and inactive states
+        const activeClasses = ['border-indigo-500', 'text-indigo-600'];
+        const inactiveClasses = ['border-transparent', 'text-gray-500'];
+
+        // Reset classes on all tabs to inactive state
+        document.querySelectorAll('nav > a').forEach(tab => {
+            tab.classList.remove(...activeClasses);
+            tab.classList.add(...inactiveClasses);
+        });
+
+        // Set the clicked tab to active state
+        activeTabElement.classList.remove(...inactiveClasses);
+        activeTabElement.classList.add(...activeClasses);
+    }
+
+    document.getElementById('current-tab').addEventListener('change', function () {
+        const selectedTab = this.value;
+        switch (selectedTab) {
+            case 'scores':
+                setActiveTab(document.getElementById('btnScores'));
+                toggleTables('scores');
+                loadScoresTable(personId);
+                break;
+            case 'stateRecords':
+                setActiveTab(document.getElementById('btnStateRecords'));
+                toggleTables('stateRecords');
+                loadStateRecordsTable(personId);
+                break;
+            case 'podiums':
+                setActiveTab(document.getElementById('btnPodiums'));
+                toggleTables('podiums');
+                loadPodiumsTable(personId);
+                break;
+        }
+    });
+
 
     function toggleTables(tableToShow) {
         // Cache the jQuery objects
@@ -52,20 +98,22 @@ document.addEventListener('DOMContentLoaded', function () {
         let tableOptions = {
             columnDefs: [
                 {targets: [0, 1, 2, 3, 4], className: "text-sm"},
-                {target: 0, // Division
-                    render: function ( data, type, row ) {
-                    let q_division = '?age_division='+encodeURIComponent(row.age_division)+
-                        '&gender='+encodeURIComponent(row.gender)+
-                        '&equipment_class='+encodeURIComponent(row.equipment_class)
-                    return '<a href="/scores/'+row.round_id+q_division+'">'+row.division+'</a>';
+                {
+                    target: 0, // Division
+                    render: function (data, type, row) {
+                        let q_division = '?age_division=' + encodeURIComponent(row.age_division) +
+                            '&gender=' + encodeURIComponent(row.gender) +
+                            '&equipment_class=' + encodeURIComponent(row.equipment_class)
+                        return '<a href="/scores/' + row.round_id + q_division + '">' + row.division + '</a>';
                     }
                 },
                 {
                     targets: 1, // Score
                     className: "text-sm text-center",
                 },
-                {target: 3, // Event
-                    render: function ( data, type, row ) {
+                {
+                    target: 3, // Event
+                    render: function (data, type, row) {
                         return '<a href="/event/' + row.event_id + '">' + data + '</a>';
                     }
                 },
@@ -153,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 {targets: [0, 1, 2, 3], className: "text-sm"},
                 {
                     targets: 0, // Place
-                    render: function (data, type, row) {
+                    render: function (data) {
                         switch (data) {
                             case 1:
                                 return '🥇';

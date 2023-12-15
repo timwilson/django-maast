@@ -1,14 +1,41 @@
 {% extends "_base.html" %}
 {% load static %}
 {% block head %}{% endblock head %}
-{% block title %}{{ person.full_name }} Profile{% endblock title %}
+{% block title %}MAA &mdash; {{ person.full_name }} Results{% endblock title %}
 {% block content %}
-    <h1>{{ person.full_name }}</h1>
-    <div class="button-group">
-        <button id="btnScores">Scores</button>
-        <button id="btnStateRecords">State Records</button>
-        <button id="btnPodiums">Podiums</button>
+
+    <!-- Archer profile tabs -->
+    <div class="border-b border-gray-200 pb-5 sm:pb-0">
+        <h2 class="text-2xl font-semibold leading-6 text-gray-900 mt-7 mb-5">{{ person.full_name }}</h2>
+        <div class="mt-3 sm:mt-4">
+            <!-- Dropdown menu on small screens -->
+            <div class="sm:hidden">
+                <label for="current-tab" class="sr-only">Select a tab</label>
+                <select id="current-tab" name="current-tab"
+                        class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                    <option value="scores" selected>Scores</option>
+                    <option value="stateRecords">State Records</option>
+                    <option value="podiums">Podiums</option>
+                </select>
+            </div>
+            <!-- Tabs at small breakpoint and up -->
+            <div class="hidden sm:block">
+                <nav class="-mb-px flex space-x-8">
+                    <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
+                    <a href="#" id="btnScores"
+                       class="active-tab border-indigo-500 text-indigo-600 whitespace-nowrap border-b-2 px-1 pb-4 text-md font-medium"
+                       aria-current="page">Scores</a>
+                    <a href="#" id="btnStateRecords"
+                       class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 px-1 pb-4 text-md font-medium">State
+                        Records</a>
+                    <a href="#" id="btnPodiums"
+                       class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 px-1 pb-4 text-md font-medium">Podiums</a>
+                    <span class="whitespace-nowrap border-b-2 px-1 pb-4 text-md font-medium">Additional text</span>
+                </nav>
+            </div>
+        </div>
     </div>
+
     <div class="mt-8 flow-root">
         <div class="inline-block min-w-full align-middle">
             <div id="scoresTableContainer">
@@ -22,6 +49,9 @@
             </div>
         </div>
     </div>
+
+
+
     <div data-person-id="{{ person.id }}" style="display:none"></div>
 {% endblock content %}
 
