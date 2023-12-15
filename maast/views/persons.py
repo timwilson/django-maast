@@ -97,12 +97,21 @@ def fetch_person_podiums(person_id: int) -> List[Dict[str, Any]]:
     return response.json()
 
 
-def group_podium_finishes(finishes: List[Dict]) -> Dict[int, int]:
+def get_podium_finishes_summary(finishes: List[Dict]) -> List[str]:
     podium_finishes = defaultdict(int)
     for finish in finishes:
         if finish["place"] in [1, 2, 3]:
             podium_finishes[finish["place"]] += 1
-    return dict(podium_finishes)
+
+    # Mapping places to their corresponding emojis
+    place_to_emoji = {1: "🥇", 2: "🥈", 3: "🥉"}
+
+    podium_summary = []
+    for place, count in podium_finishes.items():
+        emoji = place_to_emoji.get(place, "")
+        podium_summary.append(f"{count} {emoji}")
+
+    return podium_summary
 
 
 def get_valid_person_state_records(
@@ -200,9 +209,11 @@ def get_valid_person_podiums(
     return JsonResponse(processed_sorted_podiums, safe=False)
 
 
-def search_persons_by_name(request: HttpRequest) -> JsonResponse | HttpResponseBadRequest:
+def search_persons_by_name(
+    request: HttpRequest,
+) -> JsonResponse | HttpResponseBadRequest:
     if (
-            request.headers.get("X-Requested-With") != "XMLHttpRequest"
+        request.headers.get("X-Requested-With") != "XMLHttpRequest"
     ) and not settings.DEBUG:
         return HttpResponseBadRequest()
 
@@ -231,6 +242,8 @@ def get_valid_data_by_person(request: HttpRequest, person_slug: str) -> HttpResp
         >>> response = get_valid_data_by_person(request, person_slug)
     """
     person = fetch_person_record(person_slug)
+    podiums = fetch_person_podiums(person.id)
+    podium_summary = get_podium_finishes_summary(podiums)
 
-    context = {"person": person}
+    context = {"person": person, "podium_summary": podium_summary}
     return render(request, "person_profile.html", context)

@@ -10,6 +10,9 @@
         <div class="mt-3 sm:mt-4">
             <!-- Dropdown menu on small screens -->
             <div class="sm:hidden">
+                <div class="mb-5">{% for podium_finishes in podium_summary %}<span class="-mt-3">
+                        <span class="text-gray-500 text-md font-medium">{{ podium_finishes }}</span>
+                </span>{% endfor %}</div>
                 <label for="current-tab" class="sr-only">Select a tab</label>
                 <select id="current-tab" name="current-tab"
                         class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
@@ -30,7 +33,9 @@
                         Records</a>
                     <a href="#" id="btnPodiums"
                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 px-1 pb-4 text-md font-medium">Podiums</a>
-                    <span class="whitespace-nowrap border-b-2 px-1 pb-4 text-md font-medium">Additional text</span>
+                    <span class="flex space-x-4">{% for podium_finishes in podium_summary %}
+                        <span class="text-gray-500 text-md font-medium">{{ podium_finishes }}</span>
+                    {% endfor %}</span>
                 </nav>
             </div>
         </div>
