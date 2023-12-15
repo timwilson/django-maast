@@ -10,18 +10,22 @@
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/fh-3.4.0/r-2.5.0/rg-1.4.1/datatables.min.css"
+          rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/fh-3.4.0/r-2.5.0/rg-1.4.1/datatables.min.js"></script>
     {% block head %}
     {% endblock head %}
     <title>{% block title %}Bookstore{% endblock title %}</title>
 </head>
 <body>
 {% include "_header.html" %}
-    <div class="container mx-auto sm:px-6 lg:px-8">
-        {% block content %}
-        {% endblock content %}
-    </div>
+<div class="container mx-auto sm:px-6 lg:px-8">
+    {% block content %}
+    {% endblock content %}
+</div>
 {% include "modal.html" %}
 {% include "_footer.html" %}
+{#<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>#}
 <script>
     // JavaScript for the modal functionality
     document.addEventListener('DOMContentLoaded', (event) => {
@@ -46,6 +50,45 @@
             }
         });
     });
+
+    // JavaScript for the archer search feature
+    $(document).ready(function () {
+        $('#search').on('input', function () {
+            var query = $(this).val();
+
+            if (query.length >= 3) {
+                $.ajax({
+                    url: '/api/search',
+                    data: {
+                        name: query
+                    },
+                    success: function (data) {
+                        $('#search-results').empty();
+                        // Create an unordered list with Tailwind classes
+                        var resultList = $('<ul class="list-none bg-white rounded-lg shadow-lg">');
+
+                        $.each(data, function (i, person) {
+                            // Create list item for each result with Tailwind classes
+                            var listItem = $('<li class="px-4 py-1 hover:bg-gray-100">')
+                                .append($('<a>')
+                                    .attr('href', '/profile/' + person.slug)
+                                    .text(person.first_name + ' ' + person.last_name)
+                                );
+
+                            // Append list item to the unordered list
+                            resultList.append(listItem);
+                        });
+
+                        // Append the entire list to the search-results div
+                        $('#search-results').append(resultList);
+                    }
+                });
+            } else {
+                $('#search-results').empty();
+            }
+        });
+    });
+
 </script>
 {% block extra_js %}
 {% endblock extra_js %}

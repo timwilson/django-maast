@@ -26,6 +26,15 @@ def fetch_person_record(person_slug: str) -> Person:
     return person
 
 
+def fetch_search_results(name: str) -> List[Dict[str, Any]]:
+    url = f"{settings.API_HOST}/v1/persons"
+    params = {"name": name}
+
+    with MaastHTTPClient() as client:
+        response = client.get(url, params=params)
+    return response.json()
+
+
 def fetch_person_state_records(person_id: int) -> List[Dict[str, Any]]:
     """
     Fetches the state records of a person with the given person_id from the MAAST API.
@@ -147,7 +156,7 @@ def get_valid_person_scores(
 
     """
     if (
-            request.headers.get("X-Requested-With") != "XMLHttpRequest"
+        request.headers.get("X-Requested-With") != "XMLHttpRequest"
     ) and not settings.DEBUG:
         return HttpResponseBadRequest()
 
@@ -181,7 +190,7 @@ def get_valid_person_podiums(
         result = get_valid_person_podiums(request, person_id)
     """
     if (
-            request.headers.get("X-Requested-With") != "XMLHttpRequest"
+        request.headers.get("X-Requested-With") != "XMLHttpRequest"
     ) and not settings.DEBUG:
         return HttpResponseBadRequest()
 
@@ -189,6 +198,17 @@ def get_valid_person_podiums(
     sort_keys = ["age_division", "start_date"]
     processed_sorted_podiums = validate_and_sort_records(raw_podiums, Finish, sort_keys)
     return JsonResponse(processed_sorted_podiums, safe=False)
+
+
+def search_persons_by_name(request: HttpRequest) -> JsonResponse | HttpResponseBadRequest:
+    if (
+            request.headers.get("X-Requested-With") != "XMLHttpRequest"
+    ) and not settings.DEBUG:
+        return HttpResponseBadRequest()
+
+    name = request.GET.get("name")
+    results = fetch_search_results(name)
+    return JsonResponse(results, safe=False)
 
 
 def get_valid_data_by_person(request: HttpRequest, person_slug: str) -> HttpResponse:

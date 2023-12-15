@@ -7,6 +7,7 @@ from maast.views.persons import (
     get_valid_person_scores,
     get_valid_person_podiums,
     get_valid_person_state_records,
+    search_persons_by_name,
 )
 from maast.views.records import get_valid_records_by_round
 from maast.views.scores import get_valid_scores_by_round_and_division
@@ -28,4 +29,5 @@ urlpatterns = [
         name="api_records",
     ),
     path("api/podiums/<int:person_id>", get_valid_person_podiums, name="api_podiums"),
+    path("api/search", search_persons_by_name, name="api_person_search"),
 ]
