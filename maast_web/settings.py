@@ -69,7 +69,11 @@ ROOT_URLCONF = "maast_web.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "maast/templates", BASE_DIR / "theme/templates"],
+        "DIRS": [
+            BASE_DIR / "maast/templates",
+            BASE_DIR / "theme/templates",
+            BASE_DIR / "blog/templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
