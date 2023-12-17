@@ -79,9 +79,11 @@ def get_valid_scores_by_round_and_division(
 
     # Assuming round_name is available from the first record or another source
     round_name = raw_scores[0]["round"]["name"] if raw_scores else ""
+    round_id = raw_scores[0]["round"]["id"] if raw_scores else ""
     division = f"{age_division} {gender} {equipment_class}"
     context = {
         "round_name": round_name,
+        "round_id": round_id,
         "division": division,
         "scores": processed_sorted_scores,
     }

@@ -1,0 +1,27 @@
+#recordTable > tbody > tr > th,
+#scoreTable > tbody > tr.dtrg-level-0,
+#scoresTable > tbody > tr > th,
+#stateRecordsTable > tbody > tr > th,
+#podiumsTable > tbody > tr > th {
+	background: #C1C7DB;
+	color: black;
+	font-size: 1em;
+	font-weight: 600;
+}
+
+#recordTable > thead > tr > th,
+#scoreTable > thead > tr > th,
+#scoresTable > thead > tr > th,
+#stateRecordsTable > thead > tr > th,
+#podiumsTable > thead > tr > th {
+    background: #1B375C;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+#scoreTable > tbody > tr.dtrg-level-1 {
+    font-size: 0.95em;
+    font-weight: 400;
+    color: #C03A32;
+}

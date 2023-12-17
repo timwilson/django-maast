@@ -42,9 +42,17 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                nfaadkblue: "#103B70",
+                nfaaltblue: "#C1C7DB",
+                nfaaorange: "#C03A32",
+                usablue: "#1B375C",
+                usared: "#A81D30",
+            },
+        },
     },
-    safelist: [
+    safeList: [
         'text-center', 'text-lg',
     ],
     plugins: [

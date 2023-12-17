@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function setActiveTab(activeTabElement) {
         // Define the classes for active and inactive states
-        const activeClasses = ['border-indigo-500', 'text-indigo-600'];
+        const activeClasses = ['border-nfaaorange', 'text-nfaaorange'];
         const inactiveClasses = ['border-transparent', 'text-gray-500'];
 
         // Reset classes on all tabs to inactive state
@@ -104,17 +104,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         let q_division = '?age_division=' + encodeURIComponent(row.age_division) +
                             '&gender=' + encodeURIComponent(row.gender) +
                             '&equipment_class=' + encodeURIComponent(row.equipment_class)
-                        return '<a href="/scores/' + row.round_id + q_division + '">' + row.division + '</a>';
+                        return '<a href="/scores/' + row.round_id + q_division + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + row.division + '</a>';
                     }
                 },
                 {
                     targets: 1, // Score
-                    className: "text-sm text-center",
+                    className: "text-sm",
                 },
                 {
                     target: 3, // Event
                     render: function (data, type, row) {
-                        return '<a href="/event/' + row.event_id + '">' + data + '</a>';
+                        return '<a href="/event/' + row.event_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
                     }
                 },
             ],
@@ -154,17 +154,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
                     targets: 0, // Round
                     render: function (data, type, row) {
-                        return '<a href="/records/' + row.round_id + '">' + data + '</a>';
+                        return '<a href="/records/' + row.round_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
+                    }
+                },
+                {
+                    target: 1, // Division
+                    render: function (data, type, row) {
+                        let division = '?age_division=' + encodeURIComponent(row.age_division) +
+                            '&gender=' + encodeURIComponent(row.gender) +
+                            '&equipment_class=' + encodeURIComponent(row.equipment_class)
+                        return '<a href="/scores/' + row.round_id + division + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + row.gender + ' ' + row.equipment_class + '</a>';
                     }
                 },
                 {
                     targets: 2, // Score
-                    className: "text-sm text-center",
+                    className: "text-sm",
                 },
                 {
                     targets: 4, // Event
                     render: function (data, type, row) {
-                        return '<a href="/event/' + row.event_id + '">' + data + '</a>';
+                        return '<a href="/event/' + row.event_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
                     }
                 }
             ],
@@ -217,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
                     targets: 1, // Event
                     render: function (data, type, row) {
-                        return '<a href="/event/' + row.event_id + '">' + data + '</a>';
+                        return '<a href="/event/' + row.event_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
                     }
                 }
             ],

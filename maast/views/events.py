@@ -47,6 +47,7 @@ def get_valid_scores_by_event(request: HttpRequest, event_id: int) -> HttpRespon
     raw_scores = fetch_event_scores(event_id)
     sort_keys = [
         "division",
+        "round",
         "-score",
         "-x_count",
     ]

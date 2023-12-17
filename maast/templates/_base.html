@@ -1,4 +1,4 @@
-{% load static tailwind_tags %}
+{% load tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% tailwind_preload_css %}
     {% tailwind_css %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
@@ -23,34 +24,8 @@
     {% block content %}
     {% endblock content %}
 </div>
-{% include "modal.html" %}
 {% include "_footer.html" %}
-{#<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>#}
 <script>
-    // JavaScript for the modal functionality
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const modal = document.getElementById('modal');
-        const viewRecordsLink = document.getElementById('viewRecordsLink');
-        const closeModal = document.getElementById('closeModal');
-
-        if (viewRecordsLink) {
-            viewRecordsLink.onclick = function (e) {
-                e.preventDefault(); // Prevent default link behavior
-                modal.classList.remove('hidden');
-            };
-        }
-
-        closeModal.onclick = function () {
-            modal.classList.add('hidden');
-        }
-
-        window.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                modal.classList.add('hidden');
-            }
-        });
-    });
-
     // JavaScript for the archer search feature
     $(document).ready(function () {
         $('#search').on('input', function () {
@@ -88,6 +63,27 @@
             }
         });
     });
+
+    // Toggle the mobile menu
+    $(document).ready(function () {
+        const menuButton = $('[aria-controls="mobile-menu"]');
+        const mobileMenu = $('#mobile-menu');
+        const openIcon = menuButton.find('.block'); // Hamburger icon
+        const closeIcon = menuButton.find('.hidden'); // X icon
+
+        // Hide the mobile menu initially
+        mobileMenu.hide();
+
+        menuButton.click(function () {
+            // Toggle the mobile menu
+            mobileMenu.toggle();
+
+            // Swap the visibility of the hamburger and X icons
+            openIcon.toggleClass('hidden');
+            closeIcon.toggleClass('hidden');
+        });
+    });
+
 
 </script>
 {% block extra_js %}
