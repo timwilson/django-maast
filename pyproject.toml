@@ -13,6 +13,7 @@ python-decouple = "^3.8"
 django-tailwind = {extras = ["reload"], version = "^3.6.0"}
 pydantic = "^2.5.2"
 fontawesomefree = "^6"
+django-meta = "^2.4.1"
 
 [build-system]
 requires = ["poetry-core"]

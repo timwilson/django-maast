@@ -92,6 +92,20 @@ asgiref = ">=3.6"
 Django = ">=3.2"
 
 [[package]]
+name = "django-meta"
+version = "2.4.1"
+description = "Pluggable app for handling webpage meta tags and OpenGraph properties"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-meta-2.4.1.tar.gz", hash = "sha256:04de9d65d8a7f9be487835a6311d5ca4f2c4f9072fad82aeb0894830aba3ba59"},
+    {file = "django_meta-2.4.1-py2.py3-none-any.whl", hash = "sha256:9ecd98cf37bdb0fb7e314a94b2a069d838e0ebe23c50c8848aa9dd87c36cda41"},
+]
+
+[package.extras]
+docs = ["django (<5.0)", "sphinx-rtd-theme"]
+
+[[package]]
 name = "django-tailwind"
 version = "3.6.0"
 description = "Tailwind CSS Framework for Django projects"
@@ -385,4 +399,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "958aab60110530e999350d10344080f34e993f6db33dadcd0f5a5de72f32c748"
+content-hash = "70163d2ca4d104060618ea6cb0aceb5eddc4106341f88be8fe3d20ccf556bd42"

@@ -1,7 +1,11 @@
+from urllib.parse import quote
+
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from typing import List, Dict, Any
+
+from meta.views import Meta
 
 from maast.models import Score
 from maast.services.group_and_sort import validate_and_sort_records
@@ -81,11 +85,29 @@ def get_valid_scores_by_round_and_division(
     round_name = raw_scores[0]["round"]["name"] if raw_scores else ""
     round_id = raw_scores[0]["round"]["id"] if raw_scores else ""
     division = f"{age_division} {gender} {equipment_class}"
+    url = f"/scores/{round_id}?age_division={quote(age_division)}&gender={gender}&equipment_class={quote(equipment_class)}"
+
+    meta = Meta(
+        title=f"MAA rankings {division} — {round_name}",
+        site_name="MAA Score Tabulator",
+        description=f"MAA rankings in the {division} division for the {round_name} round since 2003",
+        image_object={
+            "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+            "type": "image/png",
+            "width": 1200,
+            "height": 628,
+            "alt": "MAAST: State record and score database",
+        },
+        keywords=[division, round_name, "rankings", age_division, equipment_class],
+    )
+
     context = {
         "round_name": round_name,
         "round_id": round_id,
         "division": division,
         "scores": processed_sorted_scores,
+        "meta": meta,
+        "og_url": url,
     }
 
     return render(request, "scores_by_round_and_division.html", context)

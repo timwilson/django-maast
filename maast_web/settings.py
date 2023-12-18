@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/dev/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
+
 from decouple import config
 from pathlib import Path
 
@@ -46,11 +47,13 @@ INSTALLED_APPS = [
     # Local
     "maast.apps.MaastConfig",
     "blog.apps.BlogConfig",
+    "pages",
     # Third-party
     "tailwind",
     "theme",
     "django_browser_reload",
     "fontawesomefree",
+    "meta",
 ]
 
 MIDDLEWARE = [
@@ -148,3 +151,37 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Tailwind CSS
 TAILWIND_APP_NAME = "theme"
+
+# django-meta settings
+META_SITE_PROTOCOL = "https"
+META_SITE_DOMAIN = "records.themnaa.org"
+META_SITE_TYPE = "website"
+META_SITE_NAME = "MAA Score Tabulator"
+META_INCLUDE_KEYWORDS = [
+    "archery",
+    "minnesota archers alliance",
+    "maa",
+    "state records",
+    "target archery",
+    "nfaa",
+    "national field archery association",
+    "usa archery",
+    "s3da",
+    "scholastic 3d archery",
+]
+META_DEFAULT_KEYWORDS = [
+    "archery",
+    "minnesota archers alliance",
+    "maa",
+    "state records",
+    "target archery",
+    "nfaa",
+    "national field archery association",
+    "usa archery",
+    "s3da",
+    "scholastic 3d archery",
+]
+META_USE_OG_PROPERTIES = True
+META_USE_TWITTER_PROPERTIES = False
+META_USE_TITLE_TAG = True
+META_DEFAULT_IMAGE = "/static/img/MAAST-og.png"

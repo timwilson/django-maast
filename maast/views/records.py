@@ -3,6 +3,7 @@ from typing import List, Dict, Any
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from meta.views import Meta
 
 from maast.models import Record
 from maast.services.group_and_sort import validate_and_sort_records
@@ -46,5 +47,25 @@ def get_valid_records_by_round(request: HttpRequest, round_id: int) -> HttpRespo
 
     # Assuming round_name is available from the first record or another source
     round_name = raw_records[0]["round"]["name"] if raw_records else ""
-    context = {"state_records": processed_sorted_records, "round_name": round_name}
+
+    meta = Meta(
+        title=f"MAA {round_name} state records",
+        site_name="MAA Score Tabulator",
+        description=f"MAA state records for the {round_name} round since 2003.",
+        url=f"/records/{round_id}",
+        image_object={
+            "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+            "type": "image/png",
+            "width": 1200,
+            "height": 628,
+            "alt": "MAAST: State record and score database",
+        },
+        keywords=[round_name],
+    )
+
+    context = {
+        "state_records": processed_sorted_records,
+        "round_name": round_name,
+        "meta": meta,
+    }
     return render(request, "records_by_round.html", context)

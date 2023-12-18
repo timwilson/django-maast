@@ -3,6 +3,7 @@ from typing import List, Dict, Any
 from django.conf import settings
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
+from meta.views import Meta
 
 from maast.models import Score
 from maast.services.group_and_sort import validate_and_sort_records
@@ -58,11 +59,28 @@ def get_valid_scores_by_event(request: HttpRequest, event_id: int) -> HttpRespon
     event_location = (
         raw_scores[0]["event"]["location"]["name_and_location"] if raw_scores else ""
     )
+
+    meta = Meta(
+        title=f"{event_name} scores",
+        site_name="MAA Score Tabulator",
+        description=f"Archery scores for MAA members from the {event_name} on {event_date} at {event_location}.",
+        url=f"/event/{event_id}/",
+        image_object={
+            "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+            "type": "image/png",
+            "width": 1200,
+            "height": 628,
+            "alt": "MAAST: State record and score database",
+        },
+        keywords=[event_name],
+    )
+
     context = {
         "event_name": event_name,
         "event_date": event_date,
         "event_location": event_location,
         "scores": processed_sorted_scores,
+        "meta": meta,
     }
 
     return render(request, "scores_by_event.html", context)

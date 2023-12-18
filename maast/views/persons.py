@@ -4,6 +4,7 @@ from typing import Dict, List, Any
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render
+from meta.views import Meta
 
 from maast.models import Finish, Record, Score, Person
 from maast.services.group_and_sort import validate_and_sort_records
@@ -241,9 +242,25 @@ def get_valid_data_by_person(request: HttpRequest, person_slug: str) -> HttpResp
         >>> person_slug = "john-doe"
         >>> response = get_valid_data_by_person(request, person_slug)
     """
+
     person = fetch_person_record(person_slug)
     podiums = fetch_person_podiums(person.id)
     podium_summary = get_podium_finishes_summary(podiums)
 
-    context = {"person": person, "podium_summary": podium_summary}
+    meta = Meta(
+        title=f"{person.full_name} — MAA scores",
+        site_name="MAA Score Tabulator",
+        description=f"Scores, state records, and podium finishes for {person.full_name} at MAA events since 2003",
+        url=f"/profile/{person.slug}",
+        image_object={
+            "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+            "type": "image/png",
+            "width": 1200,
+            "height": 628,
+            "alt": "MAAST: State record and score database",
+        },
+        keywords=[person.full_name],
+    )
+
+    context = {"person": person, "podium_summary": podium_summary, "meta": meta}
     return render(request, "person_profile.html", context)
