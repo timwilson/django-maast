@@ -28,8 +28,10 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 
 if DEBUG:
     API_HOST = config("DEVELOPMENT_API_HOST")
+    SITE_DOMAIN = config("DEVELOPMENT_SITE_DOMAIN")
 else:
     API_HOST = config("PRODUCTION_API_HOST")
+    SITE_DOMAIN = config("PRODUCTION_SITE_DOMAIN")
 
 ALLOWED_HOSTS = []
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
     # Local
     "maast.apps.MaastConfig",
     "blog.apps.BlogConfig",
