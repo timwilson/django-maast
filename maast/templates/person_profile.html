@@ -11,6 +11,7 @@
             <!-- Dropdown menu on small screens -->
             <div class="sm:hidden">
                 <div class="mb-5">{% for podium_finishes in podium_summary %}<span class="-mt-3">
+                        <span class="text-gray-500 text-md font-medium">Podium Finishes: </span>
                         <span class="text-gray-500 text-md font-medium">{{ podium_finishes }}</span>
                 </span>{% endfor %}</div>
                 <label for="current-tab" class="sr-only">Select a tab</label>

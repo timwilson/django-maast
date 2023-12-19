@@ -108,7 +108,9 @@ def get_podium_finishes_summary(finishes: List[Dict]) -> List[str]:
     place_to_emoji = {1: "🥇", 2: "🥈", 3: "🥉"}
 
     podium_summary = []
-    for place, count in podium_finishes.items():
+    # Sort the keys of podium_finishes before iterating
+    for place in sorted(podium_finishes):
+        count = podium_finishes[place]
         emoji = place_to_emoji.get(place, "")
         podium_summary.append(f"{count} {emoji}")
 

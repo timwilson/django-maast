@@ -180,6 +180,9 @@ document.addEventListener('DOMContentLoaded', function () {
             rowGroup: {
                 dataSrc: "age_division"
             },
+            language: {
+                emptyTable: "No state records to show"
+            },
             responsive: true,
             fixedHeader: true,
             paging: true,
@@ -232,6 +235,9 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             rowGroup: {
                 dataSrc: "division"
+            },
+            language: {
+                emptyTable: "No podium finishes to show"
             },
             responsive: true,
             fixedHeader: true,
