@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
             lengthChange: false,
             ordering: false,
             info: true,
-            searching: true,
+            searching: false,
             preDrawCallback: function (settings) {
                 const api = new $.fn.dataTable.Api(settings);
                 const pagination = $(api.table().container()).find('.dataTables_paginate');
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
             lengthChange: false,
             ordering: false,
             info: true,
-            searching: true,
+            searching: false,
             preDrawCallback: function (settings) {
                 const api = new $.fn.dataTable.Api(settings);
                 const pagination = $(api.table().container()).find('.dataTables_paginate');
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
             lengthChange: false,
             ordering: false,
             info: true,
-            searching: true,
+            searching: false,
             preDrawCallback: function (settings) {
                 const api = new $.fn.dataTable.Api(settings);
                 const pagination = $(api.table().container()).find('.dataTables_paginate');

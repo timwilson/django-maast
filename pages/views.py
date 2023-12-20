@@ -70,3 +70,69 @@ class TermsView(TemplateView):
             keywords=["terms of use"],
         )
         return context
+
+
+class EquipmentClassesView(TemplateView):
+    template_name = "equipment_classes.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["meta"] = Meta(
+            title="Archery equipment class basics",
+            site_name="MAA Score Tabulator",
+            description="Information about the different equipment classes used in NFAA, USA Archery, and S3DA archery competitions",
+            url="/equipment-classes",
+            image_object={
+                "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+                "type": "image/png",
+                "width": 1200,
+                "height": 628,
+                "alt": "MAAST: State record and score database",
+            },
+            keywords=["equipment classes", "archery equipment", "equipment"],
+        )
+        return context
+
+
+class AgeDivisionsView(TemplateView):
+    template_name = "age_divisions.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["meta"] = Meta(
+            title="Archery age division basics",
+            site_name="MAA Score Tabulator",
+            description="Information about the different age divisions used in NFAA, USA Archery, and S3DA archery competitions",
+            url="/age-divisions",
+            image_object={
+                "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+                "type": "image/png",
+                "width": 1200,
+                "height": 628,
+                "alt": "MAAST: State record and score database",
+            },
+            keywords=["age divisions", "age classes"],
+        )
+        return context
+
+
+class RoundsView(TemplateView):
+    template_name = "rounds.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["meta"] = Meta(
+            title="Archery round basics",
+            site_name="MAA Score Tabulator",
+            description="Information about the different rounds used in NFAA, USA Archery, and S3DA archery competitions",
+            url="/rounds",
+            image_object={
+                "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+                "type": "image/png",
+                "width": 1200,
+                "height": 628,
+                "alt": "MAAST: State record and score database",
+            },
+            keywords=["archery rounds", "rounds"],
+        )
+        return context
