@@ -98,6 +98,23 @@ class EventRound(BaseModel):
     score_date: str
 
 
+def make_date(event_name: str) -> date | None:
+    """Make a date object when an event has no start_date given by taking the year from the event name."""
+    try:
+        year = int(event_name[:4])
+    except ValueError:
+        return None
+    return date(year, 1, 1)
+
+
+def trim_event_name(event_name: str) -> str:
+    """If the event name starts with a year, trim off the year and return the rest of the string."""
+    if event_name[:4].isdigit():
+        return event_name[4:]
+    else:
+        return event_name
+
+
 class Event(BaseModel):
     id: int
     name: str
@@ -105,10 +122,19 @@ class Event(BaseModel):
     start_date: date | None
     end_date: date | None
     location_id: int
+    has_scores: bool
     scoring_method_id: int
     event_type_id: int | None
     event_date: str
     location: Location
+
+    def template_representation(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "name": trim_event_name(self.name),
+            "start_date": self.start_date if self.start_date else make_date(self.name),
+            "has_scores": self.has_scores,
+        }
 
 
 class Finish(BaseModel):
