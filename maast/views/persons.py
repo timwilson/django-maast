@@ -207,7 +207,7 @@ def get_valid_person_podiums(
         return HttpResponseBadRequest()
 
     raw_podiums = fetch_person_podiums(person_id)
-    sort_keys = ["age_division", "start_date"]
+    sort_keys = ["division", "start_date"]
     processed_sorted_podiums = validate_and_sort_records(raw_podiums, Finish, sort_keys)
     return JsonResponse(processed_sorted_podiums, safe=False)
 
