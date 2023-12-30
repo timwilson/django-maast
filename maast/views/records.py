@@ -54,7 +54,7 @@ def get_valid_records_by_round(request: HttpRequest, round_id: int) -> HttpRespo
         description=f"MAA state records for the {round_name} round since 2003.",
         url=f"/records/{round_id}",
         image_object={
-            "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+            "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
             "type": "image/png",
             "width": 1200,
             "height": 628,

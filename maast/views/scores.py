@@ -92,7 +92,7 @@ def get_valid_scores_by_round_and_division(
         site_name="MAA Score Tabulator",
         description=f"MAA rankings in the {division} division for the {round_name} round since 2003",
         image_object={
-            "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+            "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
             "type": "image/png",
             "width": 1200,
             "height": 628,

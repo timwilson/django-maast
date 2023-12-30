@@ -1,6 +1,8 @@
 from django.views.generic import TemplateView
 from meta.views import Meta
 
+from maast_web import settings
+
 
 class RobotsTxtView(TemplateView):
     template_name = "robots.txt"
@@ -17,7 +19,7 @@ class FAQView(TemplateView):
             description="Frequently asked questions (FAQs) about the MAA Score Tabulator state record database",
             url="/faq",
             image_object={
-                "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+                "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
                 "type": "image/png",
                 "width": 1200,
                 "height": 628,
@@ -39,7 +41,7 @@ class PrivacyView(TemplateView):
             description="Privacy policy for the MAA Score Tabulator state record database",
             url="/privacy",
             image_object={
-                "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+                "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
                 "type": "image/png",
                 "width": 1200,
                 "height": 628,
@@ -61,7 +63,7 @@ class TermsView(TemplateView):
             description="Terms of Use for the MAA Score Tabulator state record database",
             url="/terms-of-use",
             image_object={
-                "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+                "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
                 "type": "image/png",
                 "width": 1200,
                 "height": 628,
@@ -83,7 +85,7 @@ class EquipmentClassesView(TemplateView):
             description="Information about the different equipment classes used in NFAA, USA Archery, and S3DA archery competitions",
             url="/equipment-classes",
             image_object={
-                "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+                "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
                 "type": "image/png",
                 "width": 1200,
                 "height": 628,
@@ -105,7 +107,7 @@ class AgeDivisionsView(TemplateView):
             description="Information about the different age divisions used in NFAA, USA Archery, and S3DA archery competitions",
             url="/age-divisions",
             image_object={
-                "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+                "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
                 "type": "image/png",
                 "width": 1200,
                 "height": 628,
@@ -127,7 +129,7 @@ class RoundsView(TemplateView):
             description="Information about the different rounds used in NFAA, USA Archery, and S3DA archery competitions",
             url="/rounds",
             image_object={
-                "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+                "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
                 "type": "image/png",
                 "width": 1200,
                 "height": 628,

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from meta.views import Meta
 from blog.models import SiteUpdateBlog
+from maast_web import settings
 
 
 def home_page_view(request):
@@ -10,7 +11,7 @@ def home_page_view(request):
         description="State records and complete score history for Minnesota Archers Alliance events since 2003",
         url="/",
         image_object={
-            "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+            "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
             "type": "image/png",
             "width": 1200,
             "height": 628,

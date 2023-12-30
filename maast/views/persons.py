@@ -255,7 +255,7 @@ def get_valid_data_by_person(request: HttpRequest, person_slug: str) -> HttpResp
         description=f"Scores, state records, and podium finishes for {person.full_name} at MAA events since 2003",
         url=f"/profile/{person.slug}",
         image_object={
-            "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+            "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
             "type": "image/png",
             "width": 1200,
             "height": 628,
