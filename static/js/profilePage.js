@@ -88,36 +88,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function loadScoresTable(personId) {
         let url = "/api/scores/" + personId;
-        let columnConfig = [
-            {title: "Division", data: "division"},
-            {title: "Score", data: "pretty_score"},
-            {title: "Date", data: "score_date"},
-            {title: "Event", data: "event_name"},
-            {title: "Location", data: "event_location"},
-        ];
+        let columnConfig = [{title: "Division", data: "division"}, {
+            title: "Score",
+            data: "pretty_score"
+        }, {title: "Date", data: "score_date"}, {title: "Event", data: "event_name"}, {
+            title: "Location",
+            data: "event_location"
+        },];
         let tableOptions = {
-            columnDefs: [
-                {targets: [0, 1, 2, 3, 4], className: "text-sm"},
-                {
-                    target: 0, // Division
-                    render: function (data, type, row) {
-                        let q_division = '?age_division=' + encodeURIComponent(row.age_division) +
-                            '&gender=' + encodeURIComponent(row.gender) +
-                            '&equipment_class=' + encodeURIComponent(row.equipment_class)
-                        return '<a href="/scores/' + row.round_id + q_division + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + row.division + '</a>';
-                    }
-                },
-                {
-                    targets: 1, // Score
-                    className: "text-sm",
-                },
-                {
-                    target: 3, // Event
-                    render: function (data, type, row) {
-                        return '<a href="/event/' + row.event_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
-                    }
-                },
-            ],
+            columnDefs: [{targets: [0, 1, 2, 3, 4], className: "text-sm"}, {
+                target: 0, // Division
+                render: function (data, type, row) {
+                    let q_division = '?age_division=' + encodeURIComponent(row.age_division) + '&gender=' + encodeURIComponent(row.gender) + '&equipment_class=' + encodeURIComponent(row.equipment_class)
+                    return '<a href="/scores/' + row.round_id + q_division + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + row.division + '</a>';
+                }
+            }, {
+                targets: 1, // Score
+                className: "text-sm",
+            }, {
+                target: 3, // Event
+                render: function (data, type, row) {
+                    return '<a href="/event/' + row.event_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
+                }
+            },],
             rowGroup: {
                 dataSrc: "round"
             },
@@ -135,48 +128,39 @@ document.addEventListener('DOMContentLoaded', function () {
                 pagination.toggle(api.page.info().pages > 1);
             },
         };
-        loadDataAndInitializeTable(url, columnConfig, tableOptions, '#scoresTable');
+        loadDataAndInitializeTable(url, columnConfig, tableOptions, '#scoresTable', '');
     }
 
     function loadStateRecordsTable(personId) {
         let url = "/api/records/" + personId;
-        let columnConfig = [
-            {title: "Round", data: "round"},
-            {title: "Division", data: "division"},
-            {title: "Score", data: "score"},
-            {title: "Date", data: "score_date"},
-            {title: "Event", data: "event_name"},
-            {title: "Location", data: "event_location"},
-        ];
+        let columnConfig = [{title: "Round", data: "round"}, {title: "Division", data: "division"}, {
+            title: "Score",
+            data: "score"
+        }, {title: "Date", data: "score_date"}, {title: "Event", data: "event_name"}, {
+            title: "Location",
+            data: "event_location"
+        },];
         let tableOptions = {
-            columnDefs: [
-                {targets: [0, 1, 2, 3, 4, 5], className: "text-sm"},
-                {
-                    targets: 0, // Round
-                    render: function (data, type, row) {
-                        return '<a href="/records/' + row.round_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
-                    }
-                },
-                {
-                    target: 1, // Division
-                    render: function (data, type, row) {
-                        let division = '?age_division=' + encodeURIComponent(row.age_division) +
-                            '&gender=' + encodeURIComponent(row.gender) +
-                            '&equipment_class=' + encodeURIComponent(row.equipment_class)
-                        return '<a href="/scores/' + row.round_id + division + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + row.gender + ' ' + row.equipment_class + '</a>';
-                    }
-                },
-                {
-                    targets: 2, // Score
-                    className: "text-sm",
-                },
-                {
-                    targets: 4, // Event
-                    render: function (data, type, row) {
-                        return '<a href="/event/' + row.event_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
-                    }
+            columnDefs: [{targets: [0, 1, 2, 3, 4, 5], className: "text-sm"}, {
+                targets: 0, // Round
+                render: function (data, type, row) {
+                    return '<a href="/records/' + row.round_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
                 }
-            ],
+            }, {
+                target: 1, // Division
+                render: function (data, type, row) {
+                    let division = '?age_division=' + encodeURIComponent(row.age_division) + '&gender=' + encodeURIComponent(row.gender) + '&equipment_class=' + encodeURIComponent(row.equipment_class)
+                    return '<a href="/scores/' + row.round_id + division + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + row.gender + ' ' + row.equipment_class + '</a>';
+                }
+            }, {
+                targets: 2, // Score
+                className: "text-sm",
+            }, {
+                targets: 4, // Event
+                render: function (data, type, row) {
+                    return '<a href="/event/' + row.event_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
+                }
+            }],
             rowGroup: {
                 dataSrc: "age_division"
             },
@@ -197,42 +181,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 pagination.toggle(api.page.info().pages > 1);
             },
         };
-        loadDataAndInitializeTable(url, columnConfig, tableOptions, '#stateRecordsTable');
+        loadDataAndInitializeTable(url, columnConfig, tableOptions, '#stateRecordsTable', '');
     }
 
     function loadPodiumsTable(personId) {
         let url = "/api/podiums/" + personId;
-        let columnConfig = [
-            {title: "Place", data: "place"},
-            {title: "Event", data: "event_name"},
-            {title: "Date", data: "event_date"},
-            {title: "Location", data: "event_location"},
-        ];
+        let columnConfig = [{title: "Place", data: "place"}, {title: "Event", data: "event_name"}, {
+            title: "Date",
+            data: "event_date"
+        }, {title: "Location", data: "event_location"},];
         let tableOptions = {
-            columnDefs: [
-                {targets: [0, 1, 2, 3], className: "text-sm"},
-                {
-                    targets: 0, // Place
-                    render: function (data) {
-                        switch (data) {
-                            case 1:
-                                return '🥇';
-                            case 2:
-                                return '🥈';
-                            case 3:
-                                return '🥉';
-                            default:
-                                return data;
-                        }
-                    },
+            columnDefs: [{targets: [0, 1, 2, 3], className: "text-sm"}, {
+                targets: 0, // Place
+                render: function (data) {
+                    switch (data) {
+                        case 1:
+                            return '🥇';
+                        case 2:
+                            return '🥈';
+                        case 3:
+                            return '🥉';
+                        default:
+                            return data;
+                    }
                 },
-                {
-                    targets: 1, // Event
-                    render: function (data, type, row) {
+            }, {
+                targets: 1, // Event
+                render: function (data, type, row) {
+                    if (row.has_scores === true) {
                         return '<a href="/event/' + row.event_id + '" class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">' + data + '</a>';
+                    } else {
+                        return '<span class="text-sm">' + data + '</span>'
                     }
                 }
-            ],
+            }],
             rowGroup: {
                 dataSrc: "division"
             },
@@ -253,15 +235,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 pagination.toggle(api.page.info().pages > 1);
             },
         };
-        loadDataAndInitializeTable(url, columnConfig, tableOptions, '#podiumsTable');
+        loadDataAndInitializeTable(url, columnConfig, tableOptions, '#podiumsTable', 'Note: Some tournaments have multiple events. In the case where an event in the table is unlinked, that’s because the scores are associated with a different event at that tournament.');
     }
 
-    function loadDataAndInitializeTable(url, columnConfig, tableOptions, tableSelector) {
+    function addTableCaption(tableSelector, captionText) {
+        let dataTable = $(tableSelector).DataTable();
+        dataTable.table().node().createCaption();
+        let caption = $(dataTable.table().node().caption);
+        caption.text(captionText)
+            .addClass('text-left text-gray-600 text-sm p-2')
+            .attr('style', 'caption-side: bottom;');
+    }
+
+
+    function loadDataAndInitializeTable(url, columnConfig, tableOptions, tableSelector, captionText) {
         $.ajax({
-            url: url,
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
+            url: url, method: 'GET', dataType: 'json', success: function (data) {
                 let dataTable = $(tableSelector);
 
                 // Destroy existing DataTable
@@ -274,16 +263,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Initialize new DataTable
                 dataTable.DataTable($.extend({}, {
-                    data: data,
-                    columns: columnConfig,
+                    data: data, columns: columnConfig,
                 }, tableOptions));
+
+                // Add a caption to the table
+                addTableCaption(tableSelector, captionText);
 
                 // Modify table classes
                 // I don't think this renders properly because it's added dynamically after
                 // the table is created. The tailwind system doesn't see it, so it's not rendered.
                 dataTable.find('h1').addClass('text-lg');
-            },
-            error: function (error) {
+            }, error: function (error) {
                 console.error("Error loading data: ", error);
             }
         });

@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import List, Dict, Any
 
 from django.conf import settings
@@ -5,7 +6,7 @@ from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from meta.views import Meta
 
-from maast.models import Score
+from maast.models import Score, Event
 from maast.services.group_and_sort import validate_and_sort_records
 from maast.services.http_client import MaastHTTPClient
 
@@ -19,12 +20,18 @@ def fetch_event_scores(event_id: int) -> List[Dict[str, Any]]:
 
     Returns:
         List[Dict[str, Any]]: A list of dictionaries containing the scores of the event.
-
-    Example:
-        >>> fetch_event_scores(123)
-        [{'score': 9.5, 'player': 'John'}, {'score': 8.7, 'player': 'Alice'}, ...]
     """
     url = f"{settings.API_HOST}/v1/events/{event_id}/scores"
+    with MaastHTTPClient() as client:
+        response = client.get(url)
+    return response.json()
+
+
+def fetch_events() -> List[Dict[str, Any]]:
+    """
+    Fetches a list of events from the API.
+    """
+    url = f"{settings.API_HOST}/v1/events"
     with MaastHTTPClient() as client:
         response = client.get(url)
     return response.json()
@@ -66,7 +73,7 @@ def get_valid_scores_by_event(request: HttpRequest, event_id: int) -> HttpRespon
         description=f"Archery scores for MAA members from the {event_name} on {event_date} at {event_location}.",
         url=f"/event/{event_id}/",
         image_object={
-            "url": "https://records/themnaa.org/static/img/MAAST-og.png",
+            "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
             "type": "image/png",
             "width": 1200,
             "height": 628,
@@ -84,3 +91,40 @@ def get_valid_scores_by_event(request: HttpRequest, event_id: int) -> HttpRespon
     }
 
     return render(request, "scores_by_event.html", context)
+
+
+def get_valid_events(request: HttpRequest) -> HttpResponse:
+    raw_scores = fetch_events()
+    sort_keys = ["-start_date"]
+    processed_sorted_events = validate_and_sort_records(raw_scores, Event, sort_keys)
+    num_events = len(processed_sorted_events)
+
+    # Group events by year
+    events_by_year = defaultdict(list)
+    for event in processed_sorted_events:
+        year = event["start_date"].year
+        if event["has_scores"]:
+            events_by_year[year].append(event)
+
+    meta = Meta(
+        title="MAA Events",
+        site_name="MAA Score Tabulator",
+        description="List of events for the Minnesota Archers Alliance (MAA) since 2003.",
+        url="/events",
+        image_object={
+            "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
+            "type": "image/png",
+            "width": 1200,
+            "height": 628,
+            "alt": "MAAST: State record and score database",
+        },
+        keywords=["events"],
+    )
+
+    context = {
+        "events_by_year": dict(events_by_year),
+        "num_events": num_events,
+        "meta": meta,
+    }
+
+    return render(request, "event_list.html", context)

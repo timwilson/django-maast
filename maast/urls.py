@@ -2,7 +2,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import path
 
 from maast.sitemaps import PersonSitemap
-from maast.views.events import get_valid_scores_by_event
+from maast.views.events import get_valid_scores_by_event, get_valid_events
 from maast.views.home import home_page_view
 from maast.views.persons import (
     get_valid_data_by_person,
@@ -28,6 +28,7 @@ urlpatterns = [
         name="round_scores_by_division",
     ),
     path("event/<int:event_id>", get_valid_scores_by_event, name="event_scores"),
+    path("events", get_valid_events, name="event_list"),
     path("api/scores/<int:person_id>", get_valid_person_scores, name="api_scores"),
     path(
         "api/records/<int:person_id>",

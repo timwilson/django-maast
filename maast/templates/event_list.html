@@ -1,0 +1,38 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block head %}
+    <style>
+        .list-none li:last-child span:after {
+            content: none !important;
+        }
+    </style>
+
+{% endblock head %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+
+    <div class="mx-auto w-full max-w-4xl lg:max-w-5xl">
+        <h1 class="text-2xl font-semibold leading-6 text-nfaadkblue mt-7 lg:mt-16 mb-5">MAA Event List</h1>
+        <p class="text-base text-gray-900 mb-5"><span class="hidden md:inline">Click</span><span
+                class="inline md:hidden">Tap</span> on any of the {{ num_events }} events below to review the
+            participants and scores.</p>
+
+        {% for year, events in events_by_year.items %}
+            <h2 class="text-xl font-semibold leading-6 text-nfaaorange mt-7 mb-1">{{ year }}</h2>
+            <ul class="md:flex md:flex-wrap list-none space-y-3 md:space-y-0">
+                {% for event in events %}
+                    <li class="text-gray-900"><span class="md:after:content-['|'] md:after:text-gray-400 md:after:mx-2"><a
+                            href="/event/{{ event.id }}"
+                            class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange">{{ event.name }}</a></span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
+{% block extra_js %}
+{% endblock extra_js %}

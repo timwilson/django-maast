@@ -159,6 +159,7 @@ class Finish(BaseModel):
             "event_date": self.event.event_date,
             "event_id": self.event.id,
             "event_name": self.event.name,
+            "has_scores": self.event.has_scores,
             "event_location": self.event.location.name_and_location,
         }
 
