@@ -1,14 +1,13 @@
 from datetime import datetime
 from typing import List, Dict, Any
 
+from datetime import date, datetime
+
 
 def none_safe_key(value, reverse=False):
     """
-    Create a tuple for sorting purposes that safely handles None values.
-
-    This function is used to generate a sorting key that places None values either at
-    the beginning or the end of a sorted list, depending on the sorting order. It also
-    handles reverse sorting for integer values.
+    Create a tuple for sorting purposes that safely handles None values and reverses
+    sorting order for integer and date types.
 
     Parameters:
     - value (Any): The value to be sorted. Can be of any type.
@@ -20,10 +19,21 @@ def none_safe_key(value, reverse=False):
              non-None values and the second element is the value itself, adjusted for
              reverse sorting if applicable.
     """
-    return (
-        value is not None,
-        value if not reverse else -value if isinstance(value, int) else value,
-    )
+    if value is None:
+        return (False, value)
+
+    if reverse:
+        if isinstance(value, int):
+            return (True, -value)
+        elif isinstance(value, (date, datetime)):
+            # Inverting a date for sorting purposes by converting it to a timestamp
+            max_date = datetime.max if isinstance(value, datetime) else date.max
+            inverted_value = max_date - value
+            return (True, inverted_value)
+        else:
+            return (True, value)
+    else:
+        return (True, value)
 
 
 def validate_and_sort_records(
