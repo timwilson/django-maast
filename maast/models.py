@@ -33,6 +33,7 @@ class Person(BaseModel):
     last_name: str
     name_suffix: str | None
     nickname: str | None
+    family_name: str | None
     slug: str
     is_deceased: bool
     full_name: str

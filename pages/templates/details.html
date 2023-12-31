@@ -1,0 +1,66 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block head %}
+    <!-- Add any specific head content here -->
+{% endblock head %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <div class="bg-white py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+                <h1 class="mt-2 text-3xl font-bold tracking-tight text-nfaaorange sm:text-4xl">Equipment Class
+                    Basics</h1>
+                <div class="mt-10 grid max-w-xl grid-cols-1 gap-8 text-base leading-7 text-gray-700 lg:max-w-none lg:grid-cols-2">
+                    <div>
+                        <p>The different equipment classes across the NFAA, USA Archery, and S3DA organizations are a
+                            frequent point of confusion. While nearly any type of modern bow can find an appropriate
+                            class in any organization, the rules and equipment class names vary.</p>
+                        <p class="mt-5">Generally speaking, the equipment class is determined by the following four
+                            categories:</p>
+                        <ol class="mt-5 list-decimal list-inside">
+                            <li>Compound or recurve</li>
+                            <li>Fixed, movable, or no sights</li>
+                            <li>Mechanical release aid or fingers release</li>
+                            <li>Stabilizer length (if any)</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <p>For the detailed equipment class rules, it’s best to consult the organizations’ websites:</p>
+                        <ul class="mt-5 ml-4 list-disc list-outside">
+                            <li>
+                                <a class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange"
+                                   href="https://www.worldarchery.sport/rulebook/article/793">Book 3, Chapter 11</a> of
+                                the World Archery Rulebook (USA Archery follows World Archery rules.)
+                            </li>
+                            <li>NFAA <a
+                                    class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange"
+                                    href="https://nfaausa.com/files/by-laws-article-i-and-article-ii-160223232015.pdf">By-Laws,
+                                Article II</a></li>
+                            <li>S3DA <a
+                                    class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange"
+                                    href="https://www.s3da.net/wp-content/uploads/2023/12/2023-2024-S3DA-Official-Rules.pdf">2023&ndash;2024
+                                General Rules</a></li>
+                        </ul>
+                        <p class="mt-5">The following diagram shows the relationship among the various equipment
+                            classes. Not all organizations include
+                            all types of bows.</p>
+                    </div>
+                </div>
+            </div>
+            <figure>
+                <img class="m-10 mx-auto content-center w-auto md:w-3/5 h-auto"
+                     src="{% static 'img/Equipment_class_diagram.svg' %}"
+                     alt="Diagram comparing equipment classes from the NFAA, USA Archery, and S3DA"></figure>
+        </div>
+    </div>
+
+
+
+
+{% endblock content %}
+
+{% block extra_js %}
+{% endblock extra_js %}
