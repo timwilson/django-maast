@@ -8,16 +8,15 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-    <div class="bg-white py-24 sm:py-32">
+    <div class="bg-white py-12 sm:py-12">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-                <h1 class="mt-2 text-3xl font-bold tracking-tight text-nfaaorange sm:text-4xl">Equipment Class
-                    Basics</h1>
-                <div class="mt-10 grid max-w-xl grid-cols-1 gap-8 text-base leading-7 text-gray-700 lg:max-w-none lg:grid-cols-2">
+                <h1 class="mt-2 text-2xl font-bold tracking-tight text-nfaaorange sm:text-2xl">Equipment Classes</h1>
+                <div class="mt-2 grid max-w-xl grid-cols-1 gap-8 text-base leading-7 text-gray-700 lg:max-w-none lg:grid-cols-2">
                     <div>
-                        <p>The different equipment classes across the NFAA, USA Archery, and S3DA organizations are a
-                            frequent point of confusion. While nearly any type of modern bow can find an appropriate
-                            class in any organization, the rules and equipment class names vary.</p>
+                        <p class="mt-5">The different equipment classes across the NFAA, USA Archery, and S3DA
+                            organizations are a frequent point of confusion. While nearly any type of modern bow can
+                            find an appropriate class in any organization, the rules and equipment class names vary.</p>
                         <p class="mt-5">Generally speaking, the equipment class is determined by the following four
                             categories:</p>
                         <ol class="mt-5 list-decimal list-inside">
@@ -28,7 +27,8 @@
                         </ol>
                     </div>
                     <div>
-                        <p>For the detailed equipment class rules, it’s best to consult the organizations’ websites:</p>
+                        <p class="mt-5">For the detailed equipment class rules, it’s best to consult the organizations’
+                            websites:</p>
                         <ul class="mt-5 ml-4 list-disc list-outside">
                             <li>
                                 <a class="underline decoration-dotted decoration-from-font underline-offset-4 hover:decoration-solid hover:decoration-nfaaorange"
@@ -49,16 +49,212 @@
                             all types of bows.</p>
                     </div>
                 </div>
+                <figure class="m-10">
+                    <img class="mx-auto content-center w-auto md:w-3/5 h-auto"
+                         src="{% static 'img/Equipment_class_diagram.svg' %}"
+                         alt="Diagram comparing equipment classes from the NFAA, USA Archery, and S3DA"></figure>
+
+                <h1 class="my-2 text-2xl font-bold tracking-tight text-nfaaorange sm:text-2xl">Age Divisions</h1>
+                <p class="text-base text-gray-900 mb-5">The NFAA, USA Archery, and S3DA all calculate age divisions for
+                    competitions differently. Here's a breakdown.</p>
+
+                <h2 class="mt-8 text-xl font-bold tracking-tight text-nfaadkblue sm:text-xl">NFAA</h2>
+                <div class="mt-2 grid max-w-xl grid-cols-1 gap-8 text-base leading-7 text-gray-700 lg:max-w-none lg:grid-cols-2">
+                    <div>
+                        <p class="text-base text-gray-900 mb-5">The NFAA uses the archer’s age on the first day of the
+                            competition, so it’s possible that an archer may start a calendar year competing in one
+                            division and change to a different one after their birthday. Archers in the youth divisions
+                            may “shoot up” into any age division including adult. Older archers can elect to “shoot down”
+                            into the adult division.</p>
+                        <p class="text-base text-gray-900 mb-5">The NFAA has professional divisions in the Adult,
+                        Senior, Silver Senior, and Master Senior age divisions. Archers younger than 18 can compete as
+                        professionals with special permission.</p>
+                    </div>
+                    <div>
+                        <div class="overflow-x-auto -mt-8 mb-6 lg:m-0">
+                            <div class="inline-block min-w-full py-0 align-middle sm:px-6 lg:px-8">
+                                <table class="divide-y divide-gray-300">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="px-3 pb-2 text-left text-sm font-semibold text-gray-900">
+                                            Division
+                                        </th>
+                                        <th scope="col" class="px-3 pb-2 text-left text-sm font-semibold text-gray-900">
+                                            Ages
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Cub</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Under 12</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Youth</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">12&ndash;14</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Young Adult</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">15&ndash;17</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Adult</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">18&ndash;49</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Senior</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">50&ndash;59</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Silver Senior</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">60&ndash;69</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Master Senior</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">70+</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="mt-2 text-xl font-bold tracking-tight text-nfaadkblue sm:text-xl">USA Archery</h2>
+                <div class="mt-2 grid max-w-xl grid-cols-1 gap-8 text-base leading-7 text-gray-700 lg:max-w-none lg:grid-cols-2">
+                    <div>
+                        <p class="text-base text-gray-900 mb-5">USA Archery calculates age divisions based on the
+                            archer’s age on December
+                            31st. As a result, there are never any age division changes during any calendar year.
+                            If an archer’s birthday falls on December 31st and that birthday will move them to the
+                            next higher age division, they will compete in that age division for the entire preceding
+                            year. Like the equipment classes, USA Archery aligns its rules with World Archery, the
+                            international archery governing body.</p>
+                        <p class="text-base text-gray-900 mb-5">Archers in USA Archery competitions may also shoot up or
+                            down into different age
+                            divisions. One common point of confusion is that there is no “adult” division in USA Archery
+                            competition. The 21&ndash;49 group is called “Senior”. The 50+ USA Archery age divisions are
+                            called “Master.” In addition, the youth divisions refer to the archer’s age <em>under</em> a
+                            certain limit. For example, the Under 18 age division is for archers <em>under</em> 18. If
+                            an archery is 18, then they would compete in the <em>Under</em> 21 division.</p></div>
+                    <div>
+                        <div class="overflow-x-auto -mt-8 mb-6 lg:m-0">
+                            <div class="inline-block min-w-full py-0 align-middle sm:px-6 lg:px-8">
+                                <table class="divide-y divide-gray-300">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="px-3 pb-2 text-left text-sm font-semibold text-gray-900">
+                                            Division
+                                        </th>
+                                        <th scope="col" class="px-3 pb-2 text-left text-sm font-semibold text-gray-900">
+                                            Ages
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">U13</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">12 and under</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">U15</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">13&ndash;14</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">U18</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">15&ndash;17</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">U21</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">18&ndash;20</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Senior</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">21&ndash;49</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Master 50</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">50&ndash;59</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Master 60</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">60&ndash;69</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Master 70</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">70&ndash;79</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Master 80</td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">80+</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="mt-2 text-xl font-bold tracking-tight text-nfaadkblue sm:text-xl">S3DA</h2>
+                <div class="mt-2 grid max-w-xl grid-cols-1 gap-8 text-base leading-7 text-gray-700 lg:max-w-none lg:grid-cols-2">
+                    <div>
+                        <p class="text-base text-gray-900 mb-5">S3DA calculates an archer’s age division based on their
+                            age as of January 1st of the year. Like USA Archery, this means that the archer will compete
+                            in the same age division for the entire calendar year. S3DA competitors may also shoot up,
+                            but they must submit a form requesting it and must shoot up for the entire year.</p>
+                        <p class="text-base text-gray-900 mb-5">Archers who are 19 may compete in S3DA if they are in
+                            high school, and 18-year-olds may compete as long as they are not in college. (Taking
+                            college classes while in high school is allowed.)</p>
+                    </div>
+
+                    <div>
+                        <div class="overflow-x-auto -mt-8 mb-6 lg:m-0">
+                            <div class="inline-block min-w-full py-0 align-middle sm:px-6 lg:px-8">
+                                <table class="divide-y divide-gray-300">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="px-3 pb-2 text-left text-sm font-semibold text-gray-900">
+                                            Division
+                                        </th>
+                                        <th scope="col" class="px-3 pb-2 text-left text-sm font-semibold text-gray-900">
+                                            Ages
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Junior Eagle
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">8 and under
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Eagle
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">9&ndash;11
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Youth
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">12&ndash;14
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">Young Adult
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-1 text-sm text-gray-500">15&ndash;18
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <figure>
-                <img class="m-10 mx-auto content-center w-auto md:w-3/5 h-auto"
-                     src="{% static 'img/Equipment_class_diagram.svg' %}"
-                     alt="Diagram comparing equipment classes from the NFAA, USA Archery, and S3DA"></figure>
         </div>
     </div>
-
-
-
 
 {% endblock content %}
 
