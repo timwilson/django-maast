@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-maast"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Django front-end for the MAAST API."
 authors = ["Tim Wilson <tim@timwilson.info>"]
 readme = "README.md"
@@ -14,6 +14,8 @@ django-tailwind = {extras = ["reload"], version = "^3.6.0"}
 pydantic = "^2.5.2"
 fontawesomefree = "^6"
 django-meta = "^2.4.1"
+whitenoise = "^6.6.0"
+gunicorn = "^21.2.0"
 
 [build-system]
 requires = ["poetry-core"]

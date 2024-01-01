@@ -9,13 +9,7 @@ services:
     networks:
       - maast
     command: python manage.py runserver 0.0.0.0:8080
-#    develop:
-#      watch:
-#        - path: .
-#          target: /code
-#          action: sync
-#        - path: ./poetry.lock
-#          action: rebuild
+#    command: gunicorn maast_web.wsgi -b 0.0.0.0:8080
     volumes:
       - .:/code
 
