@@ -25,15 +25,20 @@ SECRET_KEY = config("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
+PRODUCTION = config("PRODUCTION", default=False, cast=bool)
+
+if PRODUCTION:
+    API_HOST = config("PRODUCTION_API_HOST")
+else:
+    API_HOST = config("DEVELOPMENT_API_HOST")
 
 if DEBUG:
-    API_HOST = config("DEVELOPMENT_API_HOST")
     SITE_DOMAIN = config("DEVELOPMENT_SITE_DOMAIN")
 else:
-    API_HOST = config("PRODUCTION_API_HOST")
     SITE_DOMAIN = config("PRODUCTION_SITE_DOMAIN")
 
-ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = ["records.themnaa.org", "localhost", "127.0.0.1"]
 
 INTERNAL_IPS = ["127.0.0.1"]
 
@@ -45,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
     # Local
@@ -61,6 +67,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -98,7 +105,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "maast_web.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
@@ -108,7 +114,6 @@ DATABASES = {
         "NAME": BASE_DIR / "maast.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
@@ -147,7 +152,8 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
