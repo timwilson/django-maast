@@ -25,21 +25,19 @@ SECRET_KEY = config("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
-PRODUCTION = config("PRODUCTION", default=False, cast=bool)
+API_LOCATION = config("API_LOCATION", default="Docker", cast=str)
 
-if PRODUCTION:
-    API_HOST = config("PRODUCTION_API_HOST")
+if API_LOCATION == "Docker":
+    API_HOST = config("DOCKER_API_HOST")
 else:
-    API_HOST = config("DEVELOPMENT_API_HOST")
+    API_HOST = config("REMOTE_API_HOST")
 
 if DEBUG:
     SITE_DOMAIN = config("DEVELOPMENT_SITE_DOMAIN")
 else:
     SITE_DOMAIN = config("PRODUCTION_SITE_DOMAIN")
 
-
-ALLOWED_HOSTS = ["records.themnaa.org", "localhost", "127.0.0.1"]
-
+ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(" ")
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition
@@ -61,7 +59,6 @@ INSTALLED_APPS = [
     "tailwind",
     "theme",
     "django_browser_reload",
-    # "fontawesomefree",
     "meta",
 ]
 
@@ -152,7 +149,6 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type

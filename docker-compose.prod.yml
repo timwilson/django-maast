@@ -8,11 +8,11 @@ services:
       - "8080:8080"
     networks:
       - maast
-    command: python manage.py runserver 0.0.0.0:8080
+    command: gunicorn maast_web.wsgi:application --bind 0.0.0.0:8080 -w 4
     volumes:
       - .:/code
     env_file:
-      - ./.env.dev
+      - ./.env.prod
 
 networks:
   maast:
