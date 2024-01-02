@@ -8,8 +8,6 @@ ENV PYTHONUNBUFFERED 1
 
 # Install some system packages
 RUN apt update && apt upgrade -y && apt install -y \
-    gcc \
-    python3-dev \
     curl \
     gnupg \
     && apt clean && rm -rf /var/lib/apt/lists/*
@@ -26,9 +24,6 @@ RUN apt update && apt install -y nodejs
 # Set working directory
 WORKDIR /code
 
-# Copy the project files to the container
-COPY . .
-
 # Update pip and Install Poetry
 RUN python -m pip install --upgrade pip && \
     pip install poetry
@@ -37,4 +32,8 @@ RUN python -m pip install --upgrade pip && \
 RUN poetry config virtualenvs.create false
 
 # Install dependencies using Poetry
-RUN poetry install --no-dev
+COPY pyproject.toml poetry.lock* ./
+RUN poetry install
+
+# Copy the project files to the container
+COPY . .
