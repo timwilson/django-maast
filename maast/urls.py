@@ -12,6 +12,7 @@ from maast.views.persons import (
     search_persons_by_name,
 )
 from maast.views.records import get_valid_records_by_round
+from maast.views.redirects import redirect_old_individual_rankings
 from maast.views.scores import get_valid_scores_by_round_and_division
 
 sitemaps = {
@@ -42,5 +43,10 @@ urlpatterns = [
         sitemap,
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
+    ),
+    path(
+        "individual_rankings.php",
+        redirect_old_individual_rankings,
+        name="redirect_old_individual_rankings",
     ),
 ]
