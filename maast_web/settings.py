@@ -158,6 +158,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Custom configurations
 
+# Whitenoise settings
+
+# These settings provide support for favicons and other browser icons.
+# See https://adamj.eu/tech/2022/01/18/how-to-add-a-favicon-to-your-django-site/ for more details on this approach.
+WHITENOISE_ROOT = BASE_DIR / "static_nonversioned"
+if not DEBUG:
+    WHITENOISE_MAX_AGE = 60 * 60 * 24  # one day
+
 # Tailwind CSS
 TAILWIND_APP_NAME = "theme"
 
