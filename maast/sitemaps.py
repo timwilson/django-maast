@@ -18,7 +18,7 @@ class PersonSitemap(Sitemap):
     """
 
     def items(self):
-        client = MaastHTTPClient()  # Your custom HTTP client
+        client = MaastHTTPClient()  # Custom HTTP client
         response = client.get(f"{settings.API_HOST}/v1/persons")
         response.raise_for_status()
         person_data = response.json()
