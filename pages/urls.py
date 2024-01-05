@@ -4,7 +4,7 @@ from .views import (
     PrivacyView,
     TermsView,
     FAQView,
-    DetailsView,
+    HelpView,
 )
 
 urlpatterns = [
@@ -12,5 +12,5 @@ urlpatterns = [
     path("faq", FAQView.as_view(), name="faq"),
     path("privacy", PrivacyView.as_view(), name="privacy"),
     path("terms-of-use", TermsView.as_view(), name="terms-of-use"),
-    path("details", DetailsView.as_view(), name="details"),
+    path("help", HelpView.as_view(), name="help"),
 ]

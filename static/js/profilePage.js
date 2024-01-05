@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function loadPodiumsTable(personId) {
         let url = "/api/podiums/" + personId;
-        let columnConfig = [{title: "Place", data: "place"}, {title: "Event", data: "event_name"}, {
+        let columnConfig = [{title: "", data: "place"}, {title: "Event", data: "event_name"}, {
             title: "Date",
             data: "event_date"
         }, {title: "Location", data: "event_location"},];

@@ -74,8 +74,8 @@ class TermsView(TemplateView):
         return context
 
 
-class DetailsView(TemplateView):
-    template_name = "details.html"
+class HelpView(TemplateView):
+    template_name = "help.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -83,7 +83,7 @@ class DetailsView(TemplateView):
             title="Archery equipment, age divisions, and round details",
             site_name="MAA Score Tabulator",
             description="Information about the different equipment classes, age divisions, and rounds used in NFAA, USA Archery, and S3DA archery competitions",
-            url="/equipment-classes",
+            url="/help",
             image_object={
                 "url": f"{settings.SITE_DOMAIN}/static/img/MAAST-og.png",
                 "type": "image/png",
